@@ -1,0 +1,4456 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+  <meta charset="UTF-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />  
+
+
+<script>
+  (function () {
+    const hostname = location.hostname;
+    const pathname = location.pathname;
+    const subdomainRaw = hostname.split('.')[0];
+
+    // Bersihkan subdomain: ubah "-" jadi spasi dan kapitalisasi setiap kata
+    const formatText = (str) => {
+      return str
+        .replace(/-/g, ' ')
+        .replace(/\b\w/g, c => c.toUpperCase());
+    };
+    const subdomain = formatText(subdomainRaw);
+    const suffix = ' - Photo And Video';
+
+    const pathNameClean = pathname.replace(/^\/+|\/+$/g, '');
+
+    // Membuat judul yang lebih ramah pengguna
+    let titleText = '';
+    if (!pathNameClean || pathNameClean.toLowerCase() === 'index.html') {
+      titleText = subdomain + suffix;
+    } else {
+      const fileName = pathNameClean.split('/').pop().replace(/\.html$/i, '');
+      const decoded = decodeURIComponent(fileName.replace(/[-_]/g, ' '));
+      const fileTitle = decoded.replace(/\b\w/g, c => c.toUpperCase());
+      titleText = fileTitle;
+    }
+
+    // Masukkan <title>
+    const titleTag = document.querySelector('title') || document.createElement('title');
+    titleTag.textContent = titleText;
+    if (!titleTag.parentNode) document.head.appendChild(titleTag);
+
+    // Buat <meta name="description"> jika belum ada
+    const metaDescription = document.querySelector('meta[name="description"]') || document.createElement('meta');
+    metaDescription.name = 'description';
+    metaDescription.content = 'Page about ' + titleText + ' hosted on ' + hostname;
+    if (!metaDescription.parentNode) document.head.appendChild(metaDescription);
+
+    // Buat <meta name="author"> jika belum ada
+    const metaAuthor = document.querySelector('meta[name="author"]') || document.createElement('meta');
+    metaAuthor.name = 'author';
+    metaAuthor.content = subdomain + ' team';
+    if (!metaAuthor.parentNode) document.head.appendChild(metaAuthor);
+  })();
+</script>
+  
+  <script>  
+    (function() {  
+      const canonical = document.createElement('link');  
+      canonical.rel = 'canonical';  
+      let url = location.protocol + '//' + location.hostname + location.pathname;  
+      if (url.endsWith('/')) {  
+        url = url.slice(0, -1);  
+      }  
+      canonical.href = url || (location.protocol + '//' + location.hostname);  
+      document.head.appendChild(canonical);  
+    })();  
+  </script>  
+
+  <meta name="theme-color" content="#ffffff">  
+  <link rel="icon" href="https://raw.githubusercontent.com/hijiduatilu17plus3/0001/refs/heads/main/favicon.ico" type="image/x-icon">  
+  <link rel="icon" href="https://raw.githubusercontent.com/hijiduatilu17plus3/0001/refs/heads/main/favicon.png" type="image/png">  
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/hijiduatilu17plus3/0001/refs/heads/main/apple-touch-icon.png">  
+  <link rel="manifest" href="https://raw.githubusercontent.com/hijiduatilu17plus3/0001/refs/heads/main/site.webmanifest">  
+  <script type="text/javascript">  
+    (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};  
+    m[i].l=1*new Date();  
+    for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}  
+    k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})  
+    (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");  
+
+    ym(103370320, "init", {  
+      clickmap:true,  
+      trackLinks:true,  
+      accurateTrackBounce:true  
+    });  
+  </script>  
+  <noscript><div><img src="https://mc.yandex.ru/watch/103370320" style="position:absolute; left:-9999px;" alt="" /></div></noscript>  
+
+<link rel="preload" href="https://adabunalima5.github.io/file/css/css.css" as="style">
+<link rel="stylesheet" href="https://adabunalima5.github.io/file/css/css.css">
+  
+<!-- Google tag (gtag.js) - multiple accounts -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-WT93W2845E"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+
+  // Konfigurasi semua akun Google Analytics
+  gtag('config', 'G-WT93W2845E'); // goblog google
+  gtag('config', 'G-XHCGVT06EJ'); // raisfazriansyah722@gmail.com
+  gtag('config', 'G-L239NSVMTN'); // indrianitresna42@gmail.com
+  gtag('config', 'G-XK27E9HEDZ'); // r.fazriansyah@gmail.com
+  gtag('config', 'G-LJ7MJ4Q2VW'); // raisfazriansyah01@gmail.com
+  gtag('config', 'G-W9876DR1JZ'); //asri38770@gmail.com
+  gtag('config', 'G-YFK8DZ3FHK'); //raisfazriansyah4@gmail.com
+  gtag('config', 'G-5RHX9ESPY6'); //simerah9250@gmail.com
+</script>
+
+<!-- Google Tag Manager - ninggrai@gmail.com -->
+<script>
+(function(w,d,s,l,i){
+  w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'});
+  var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s), dl=l!='dataLayer'?'&l='+l:'';
+  j.async=true;
+  j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+  f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NWD665DQ');
+</script>
+</head>  
+<body>  
+
+	<div class="spo">
+ <!-- ads by wi3kas5alimexy.blogspot.com -->
+<script type="text/javascript">
+	atOptions = {
+		'key' : '3f672ec602df797642e9dbdfb337569e',
+		'format' : 'iframe',
+		'height' : 250,
+		'width' : 300,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/3f672ec602df797642e9dbdfb337569e/invoke.js"></script>
+<script type="text/javascript">
+	atOptions = {
+		'key' : '40f1c610090584610030c74709f82896',
+		'format' : 'iframe',
+		'height' : 90,
+		'width' : 728,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/40f1c610090584610030c74709f82896/invoke.js"></script>
+<script type="text/javascript">
+	atOptions = {
+		'key' : '0cbdb3ac944efc14e7e0fe852e3ad3a5',
+		'format' : 'iframe',
+		'height' : 600,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/0cbdb3ac944efc14e7e0fe852e3ad3a5/invoke.js"></script>
+<script type="text/javascript">
+	atOptions = {
+		'key' : 'a543729c95de3341d9f240b9b941edfe',
+		'format' : 'iframe',
+		'height' : 300,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/a543729c95de3341d9f240b9b941edfe/invoke.js"></script>
+<script type="text/javascript">
+	atOptions = {
+		'key' : '0acda123c359e1953d2186b0a74f0364',
+		'format' : 'iframe',
+		'height' : 60,
+		'width' : 468,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/0acda123c359e1953d2186b0a74f0364/invoke.js"></script>
+<script type='text/javascript' src='//pl27258148.profitableratecpm.com/fe/ec/ea/feeceae70fe7b8956ffc6e2e4f53991a.js'></script>
+<script type='text/javascript' src='//pl16804628.profitableratecpm.com/e7/19/45/e71945928ae8f99b0bee4c0d1219be5a.js'></script>
+<script type="text/javascript">
+	atOptions = {
+		'key' : '1c081498ef1d1996c45172aa313d1bdb',
+		'format' : 'iframe',
+		'height' : 50,
+		'width' : 320,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/1c081498ef1d1996c45172aa313d1bdb/invoke.js"></script>
+-->
+</div>
+
+	
+<main>
+<article>
+	
+	
+
+
+
+
+
+
+<section class="footer-gallery">
+  <h2 id="dynamicGalleryTitle"></h2>
+  <div id="ingganinggraFooterGallery" class="ingganinggraGalleryGrid" itemscope itemtype="https://schema.org/ImageGallery"></div>
+</section>
+</article>
+</main>
+	
+	
+	
+<!-- Text ALT, Caption, H3, dan P -->
+<div id="TextUntukH3" style="display:none;">
+"	sullyoon	
+
+	freebreathqaq	
+
+	呼吸菌QAQ	
+
+	lolipolice1	
+
+	𝖗𝖊𝖘𝖕𝖊𝖈𝖙 𝖆𝖓𝖉 𝖕𝖗𝖔𝖙𝖊𝖈𝖙 𝖙𝖍𝖞 𝖑𝖔𝖑𝖎	
+
+	t.ai.5488	
+
+	Teppei Kido	
+
+	the_rich444_ofc	
+
+	THE_RICH444	
+
+	catoiaoia	"
+
+"	oia oia cat	
+
+	ander_chang	
+
+	張安德 Andrew Chang	
+
+	keepbuy_shop	
+
+	Keepbuy_shop	
+
+	rosa.supremacy	
+
+	Sota.amv	
+
+	andylauox	
+
+	Andy Lau • 劉德華	
+
+	oizz.3	"
+
+"	zz	
+
+	miside_ara	
+
+	Katrina	
+
+	your_errorxc	
+
+	Your_Kitty	
+
+	mita.miside_	
+
+	Mita	
+
+	tinymitamiside	
+
+	💝𝑻𝒊𝒏𝒚 𝒎𝒊𝒕𝒂💝	
+
+	cappiemita	"
+
+"	Cappie	
+
+	_kevin_hong	
+
+	真菌	
+
+	mita_miside._	
+
+	❀.𝑚𝑖𝑡𝑎.❀	
+
+	misi.demila	
+
+	Miside Miside	
+
+	aihastogames	
+
+	AIHASTO	
+
+	diggo_cappie	"
+
+"	Kindigo	
+
+	slightly205	
+
+	عبدالله ミ★	
+
+	_yuling.verna_	
+
+	(˶‾᷄ ⁻̫ ‾᷅˵)유리 ゆり🤍	
+
+	pei.12._.25	
+
+	豆腐ʕ˶'༥'˶ʔ	
+
+	ba._.99101089	
+
+	𝕐𝕦𝕟.崽崽♡	
+
+	deigmargoreupego	"
+
+"	Deigmar Paulo	
+
+	inchstroy	
+
+	KNIGHT	
+
+	ailos__12	
+
+	E雀	
+
+	xxl_ling07	
+
+	？	
+
+	yu._tinggg	
+
+	吉娃平方	
+
+	passion_for_motorcycles1983	"
+
+"	Alexis Jesús Mesquida	
+
+	owais_f_f_	
+
+	م	
+
+	meowie.ae	
+
+	ニャーウィー | Your editor cat	
+
+	akkaunt.sot1lad1	
+
+	miside030	
+
+	miside	
+
+	leo_oamv	
+
+	Leo Zak	"
+
+"	poppywooooo	
+
+	瑜瑜૮꒰ྀི∩˃ ᵕ ˂∩꒱ྀི১ yi yu	
+
+	nrn_jp04	
+
+	ナリマン アルマトイ	
+
+	eren1001110	
+
+	鄭富凱	
+
+	tokinosekai666	
+
+	JJ_GGfly	
+
+	a1xen_	
+
+	ʏᴜᴛᴀ 🎐	"
+
+"	bookish_atun_xd	
+
+	혔-★𝓂𝒶𝓉𝒽!	
+
+	jutor_liao	
+
+	Jutor Liao	
+
+	greatmensociety	
+
+	Great Men Society	
+
+	ruru_t.4	
+
+	🐔🐔💩	
+
+	alid_mondal_01	
+
+	Àlîd_Møñdâl	"
+
+"	bws.100	
+
+	bws.100®️Ⓜ️	
+
+	_bibi._77	
+
+	比比	
+
+	petzone.br	
+
+	𝗙𝗮𝗯𝗶𝗼 𝗖𝗮𝗺𝗽𝗼𝘀	
+
+	dropship	
+
+	Dropship	
+
+	variogarage	
+
+	Vario Garage	"
+
+"	clayton_wodiany	
+
+	Clay	
+
+	ghost.memeir	
+
+	𝙂𝙝𝙤𝙨𝙩	
+
+	ririooo433	
+
+	Riri	
+
+	tsai_1995_	
+
+	蔡董	
+
+	abzar.stock_123	
+
+	Abzar.stock.dubai123	"
+
+"	piaggiotyphoonclub	
+
+	Piaggio Typhoon Club	
+
+	lax.minibikes	
+
+	sammit01	
+
+	Sam Lucas - SAMMIT	
+
+	ilmessicanofficial	
+
+	Il Messicano	
+
+	nynotzz.o_o	
+
+	邱繼緯&緯緯❤️	
+
+	motorcycle.gnv.ir	"
+
+"	🔅MOHAMMAD SHONBEH🔅	
+
+	mj_tipstrik	
+
+	Mahjong.tipstrik	
+
+	quantawealth	
+
+	Alex	
+
+	himeni0510	
+
+	ひめにぃ様⚤	
+
+	jd_la_menace	
+
+	Jade Matteo Paoli	
+
+	amornthep_nam	"
+
+"	อมรเทพ จันทร์สวัสดิ์	
+
+	vidocbl	
+
+	🙏Хоть бы с#ка повезло 😅	
+
+	leika_233	
+
+	Leika_Cozy	
+
+	wangfei129129	
+
+	王菲	
+
+	fishing_hack_247	
+
+	SÕñú G	
+
+	xdwh1230	"
+
+"	丁佳偉	
+
+	chocolate_muffin_man	
+
+	John Kawawa Kadichi	
+
+	le_dahye	
+
+	이다혜	
+
+	_.elena._2014	
+
+	elena	
+
+	eldoge665	
+
+	Sillycappie	
+
+	putong_music	"
+
+"	普通Music	
+
+	7cxyz__	
+
+	tarot_lok	
+
+	樂樂塔罗师🌞	
+
+	toolsbydesign	
+
+	Travis Collins	
+
+	mountainbiking.shop	
+
+	Everything MTB	
+
+	yyukiii_n	
+
+	優雪🐰🪽	"
+
+"	jelllyfish05	
+
+	해파리	
+
+	_9oveu	
+
+	橘子色的狗妍	
+
+	cappiecoolest	
+
+	CM4C • Cappie Mita 4 Cool ( gen8 )	
+
+	nina5432	
+
+	妮娜	
+
+	cappie_official	
+
+	Cappie	"
+
+"	usoland17	
+
+	Léo Tison	
+
+	ugly_mita	
+
+	Ugly Mita	
+
+	kurumi_is_cute.oo	
+
+	Kurumi	
+
+	7_xzz_	
+
+	𝑵	
+
+	kiana.br38	
+
+	Kiana Exe	"
+
+"	miside_cappiemita	
+
+	taiwanese_superman	
+
+	台灣超人	
+
+	cirkinplanktonn	
+
+	Çirkin Plankton	
+
+	yuei_iu3	
+
+	悅	
+
+	xg3lii	
+
+	doki	
+
+	_thefamouschair	"
+
+"	Chair	
+
+	lovemusic_88	
+
+	推荐热门音乐🎶	
+
+	realtadelmondo	
+
+	larealtà	
+
+	miside_mita	
+
+	Ꮇita	
+
+	strangealert	
+
+	promos_tech	
+
+	Promos Tech	"
+
+"	komori198	
+
+	Komori Cosplay | Store & Collab 🎭	
+
+	hpz._.0713	
+
+	社恐小呆.ᐟ.ᐟ	
+
+	deng.xiaoping78	
+
+	Deng xiaoping	
+
+	zxeriascute	
+
+	zxeria	
+
+	amjadaltaamari	
+
+	Amjad issa	"
+
+"	memekardashiann	
+
+	MEMEKARDASHIANN | میم کارداشیان	
+
+	wide_meta	
+
+	Fun Music Girls 🫠🎧❤️	
+
+	tri_estet	
+
+	ЗАУР ПРО БЕГ И ТРИАТЛОН / АМБАССАДОР ЗОЖ / SWIM BIKE RUN	
+
+	10queena	
+
+	男孩&女孩 禮物專賣店	
+
+	brancobraga75	
+
+	Branco Braga	"
+
+"	apne_streetdog	
+
+	Apne Street Dogs🐾	
+
+	_2yuuni	
+
+	年糕.	
+
+	on99_sharing	
+
+	𝕆𝕟𝟡𝟡 𝕊𝕙𝕒𝕣𝕖 | 𝕄𝕖𝕞𝕖 | 🇭🇰	
+
+	hansupower	
+
+	Hansu Power Fitness Equipment	
+
+	msx_capital	
+
+	Msx Capital	"
+
+"	biel_luis_m4	
+
+	Gabriel Luïs	
+
+	superheroes.and.stuff	
+
+	Superheroes and Stuff	
+
+	amvboxing	
+
+	#NAME?	
+
+	kurumii.ae	
+
+	Kurumi	
+
+	honeypie_dailyy	
+
+	Honey pai	"
+
+"	lamont.real	
+
+	Lamont	
+
+	linyufeng134	
+
+	紀秉辰	
+
+	qiaoqiao_chen0507	
+
+	喬喬瓦娃娃（痛苦中）😫😭	
+
+	icekung220	
+
+	𝗜𝗰𝗲 𝗸𝘂𝗻𝗴🎭	
+
+	azks_n	
+
+	蛋塔in💕…	"
+
+"	carolinapanthers_rivvy	
+
+	rivvy	
+
+	anyto4ka.01	
+
+	Анюта	
+
+	vegaxo_tt	
+
+	Vegaxo	
+
+	diamon_physique	
+
+	M R Kannan	
+
+	weng.ae	
+
+	🅆🄴🄽🄶 . 🄰🄴	"
+
+"	gossip_neko_8	
+
+	🐈‍⬛八卦貓咪事務所🐈‍⬛	
+
+	dangersciye	
+
+	⚜️𝑫𝑨𝑵𝑮𝑬𝑹𝑺𝑪𝑰𝒀𝑬 ⚜️	
+
+	arthur.ediitz	
+
+	𝗦𝘂𝗻𝗴 𝗝𝗶𝗻 𝗪𝗼𝗼||𝟱𝟬𝗞	
+
+	anime_20k_uz	
+
+	ℍ𝔸𝕐𝕆𝕋	
+
+	riinime.id	
+
+	scene.anim	"
+
+"	narueditss16	
+
+	Naruedits16 on tiktok	
+
+	lee.0o0.51230104	
+
+	“眠.”	
+
+	joee_joeyy	
+
+	Joee	
+
+	venom94371	
+
+	RaptoR	
+
+	therealw.metra	
+
+	Wah Metra	"
+
+"	swmimeme	
+
+	ou	
+
+	7opt2	
+
+	⋆ حـًُر	
+
+	javierliftz	
+
+	𝑱 𝑨 𝑽 𝑰 𝑬 𝑹 𓆰𓆪𓆩𓆪	
+
+	linnnng_cos	
+
+	Linnnng ◡ 0	
+
+	theamirhan_	
+
+	TheAmirhan	"
+
+"	tzukyo_	
+
+	Tzukyo	
+
+	oniven.tt	
+
+	oniven	
+
+	animeotakuamv	
+
+	Anime otaku amv ツ	
+
+	_boxinglifestyle	
+
+	𝐄𝐋 𝐌𝐄𝐇𝐃𝐈 𝐄𝐋 𝐘𝐎𝐔𝐒𝐅𝐈	
+
+	gustavoffiel	
+
+	Gustavo Fiel	"
+
+"	localtrainbd	
+
+	Local Train BD	
+
+	epto.meme	
+
+	Epto	
+
+	adorbs_blog84	
+
+	りょう	
+
+	gw_gamewreckyt	
+
+	GAME WRECK	
+
+	bigdubhiphopnews	
+
+	BIG DUB®	"
+
+"	hkcls_	
+
+	hkcls	
+
+	anime.ic02	
+
+	chip_l_y	
+
+	Ch1pz	
+
+	aripovw.7	
+
+	𝐀𝐫𝐢𝐩𝐨𝐯🥷	
+
+	7abdukdrvv	
+
+	🗽	
+
+	lvkindy	"
+
+"	Kindy	
+
+	daily.dose.of.miside	
+
+	mita.kepochka	
+
+	Кепочка	
+
+	volcogotone	
+
+	volcogotone	
+
+	marinememes_	
+
+	anime.hakkinda	
+
+	animetr	
+
+	motivation.source12	"
+
+"	Motivation Source	
+
+	hawks_rbx	
+
+	HawksRBX_official	
+
+	dakaraanime.id	
+
+	Dakara Anime since 2018	
+
+	animeplay.idn	
+
+	Animeplay.ID	
+
+	miside_cappie._	
+
+	milaaaaa	
+
+	b_i_b_a_d_o_g	"
+
+"	🎧 Биба 🎀	
+
+	shinko84630	
+
+	☆​​​​​🇸​🇭​​​​​​​​​​​​​​​​​​​​​​​​🇮 🇳​🇰​🇴☆	
+
+	dailybuzzinstgramposter	
+
+	DailyBuzzInstgramPoster	
+
+	chuuya_uc	
+
+	太宰	
+
+	the.jx_tt	
+
+	𝙏𝙝𝙚_𝙅𝙭	
+
+	hanamori_qq	"
+
+"	花守	
+
+	okotcu.tt	
+
+	okotcu	
+
+	nanami.podcasting	
+
+	𝗠𝗮𝗿𝗶𝗻 𝗞𝗶𝘁𝗮𝗴𝗮𝘄𝗮	
+
+	westonbboyd	
+
+	Weston Boyd	
+
+	uzgoanime_tv	
+
+	UZGOANIME TV	
+
+	maxxi.tr	"
+
+"	Emin Eroglu	
+
+	__littlebocchi	
+
+	𝘽𝙤𝙘𝙘𝙝𝙞	
+
+	thecraftboyanime	
+
+	The Craft Boy Anime	
+
+	gatito._.sin.hojar	
+
+	gatito sin hogar	
+
+	meme.actually	
+
+	МЕМЫ•ВИДЕО•ЮМОР	
+
+	woodenxixi	"
+
+"	木木师父	
+
+	sakuadachi_	
+
+	Saku Adachi	
+
+	inch_wilnish	
+
+	blair_zcn	
+
+	Blair Riley🔸Anime🔹Manga🔸Memes	
+
+	nrs.only	
+
+	Only	
+
+	mahdi313foto	
+
+	Mahdi	"
+
+"	hashmat.47	
+
+	Hashmat Khan	
+
+	googlemapzfun	
+
+	GoogleMapsFun	
+
+	freefire.tj_05	
+
+	veldora 10k	
+
+	_simo__o21	
+
+	Simon	
+
+	mini.vely	
+
+	Mini	"
+
+"	misidetr	
+
+	MiSide - Türkiye!	
+
+	lyx._.little	
+
+	我宣你	
+
+	chocobotmusic	
+
+	ChocoBot	
+
+	ofluatafit	
+
+	Bodybuilding | Motivação | News	
+
+	fmibb0622	
+
+	方咪寶	"
+
+"	vinnylocasto	
+
+	Vinny LoCasto	
+
+	iandmita	
+
+	Mita❤️‍🔥	
+
+	mrs_d3m0ness	
+
+		
+
+	vaishali_ki_memes	
+
+	Anek kumar	
+
+	dopaminegain	
+
+	Dopamine gain	"
+
+"	burningadrenaline	
+
+	burningadrenaline	
+
+	just_cute_pets__	
+
+	Just_Cute_Pets	
+
+	fzxb007	
+
+	旗袍晓瑾	
+
+	bestchinesevideos	
+
+	Bestchinesevideos	
+
+	uncle_cobes	
+
+	🇺🇲 Uncle Cobes 🇺🇲	"
+
+"	phobiaspecter	
+
+	Phobia Specter	
+
+	tamerbessiso	
+
+	Tamer N. Bseiso | تامر بسيسو	
+
+	akaalexd	
+
+	AlexD	
+
+	gonzastroy	
+
+	Memes | SMS | Message	
+
+	moviemememusic	
+
+	用影視作品做迷因(順便介紹音樂）	"
+
+"	lin_.7.7	
+
+	柒柒	
+
+	nutricrentes	
+
+	Nutricrentes	
+
+	regina_lai_0911	
+
+	賴沛嫻	
+
+	adhamov_o14	
+
+	uce_gang	
+
+	Simeon Fiapule	
+
+	dengjiahua0604	"
+
+"	鄧佳華	
+
+	_unceol	
+
+	𝐔𝐍𝐂𝐋𝐄	
+
+	hongkong66uo	
+
+	66uoHK	
+
+	riyue175	
+
+	咪咪	
+
+	_zeta18p	
+
+	𝖅𝖊𝖙𝖆.𝕻𝖆𝖚𝖑𝖔	
+
+	octopus_third_job	"
+
+"	章魚的第三份工🐙🌈🕊️	
+
+	gimsia548	
+
+	시아🤍	
+
+	aidsamstiel	
+
+	AidsOnAStick/OG-aidsamstiel	
+
+	oi_may0215	
+
+	小梅	
+
+	may_021555	
+
+	小梅	
+
+	bluearchive_random_id	"
+
+"	ke-randoman blue archive	
+
+	lyx0330	
+
+	⪩. .⪨	
+
+	keobeisanxiao	
+
+	抓周抓到槍	
+
+	culturallandmarks	
+
+	Learn about the world🌍	
+
+	animeweeds2003	
+
+	AnimeWeeds	
+
+	cappie_miside	"
+
+"	𓆩 𝓚𝓮𝓹𝓸𝓬𝓱𝓴𝓪 𓆪💖	
+
+	doyouevenlift	
+
+	Do You Even Lift	
+
+	frasespicy	
+
+	FRASE SPICY 🇩🇴	
+
+	fitness__x01	
+
+	Mr_$ᴀᎻi𝕝🦍	
+
+	thefitnessfreakhq	
+
+	Fitness Freak | Gym · Fitness · Workout	
+
+	onesecondbeforedsaster	"
+
+"	M Qasim	
+
+	reichert.exploratory	
+
+	REICHERT	
+
+	chillboyclashyboy	
+
+	Chill boy Clashyboy	
+
+	adolf.hiddler	
+
+	Micheal jackler	
+
+	aryafit__	
+
+	me	
+
+	rouuudaily	"
+
+"	rouuuuuu	
+
+	zarch69	
+
+	馬目艮	
+
+	bulgogifartsalot	
+
+	Ashley	
+
+	yyds_8688	
+
+	斑斑梗圖	
+
+	nexooffic1al	
+
+	Sebastian Vaghi	
+
+	ryuto.fx	"
+
+
+  
+</div><div id="TextUntukALT" style="display:none;">
+"	Ryuto | リュート	
+
+	shadow_man1009	
+
+	the_man_in_shadows	
+
+	00__senpai__00	
+
+	訪問__1M¥	
+
+	pp_dreammm	
+
+	Pratchaya	
+
+	things_on_my_headcate	
+
+	Kren Hafiz	
+
+	fiqor016	"
+
+"	Hafiz zulfikar	
+
+	terck_sfc	
+
+	TERCK	
+
+	miside.m	
+
+	Miside Мита	
+
+	mita4you_	
+
+	MitaisHere	
+
+	miside_edit	
+
+	Miside_Edit	
+
+	mita__fanmiside	"
+
+"	MITA	
+
+	kiama.sama	
+
+	Kira	
+
+	mita_miside1.9	
+
+	43kaizaki_arata	
+
+	Ore Waa Freakyyy	
+
+	azikk.edit	
+
+	Azikk.Edits	
+
+	visualbymag	
+
+	G.	"
+
+"	hoyoverse.edit	
+
+	Hoyoverse Edit	
+
+	varessa_v	
+
+	🤍💙𝘼𝙇𝙔𝘼 𝙆𝙐𝙅𝙊𝙐 𝙑𝘼𝙍𝙀𝙎𝙎𝘼🍰💙	
+
+	try_not.to_cringe	
+
+	CRINGE❗️❗️❗️	
+
+	hurg.le	
+
+	Edwards	
+
+	mona.saikano	
+
+	sashisensei_.	"
+
+"	akimbo696969	
+
+	Битаров Максим	
+
+	superdan8310	
+
+	何浩辰	
+
+	mita_offcl	
+
+	𝙈𝙞𝙩𝙖 💝	
+
+	miside_lover_notification	
+
+	mita_miside	
+
+	astra_clip	
+
+	Astra 星	"
+
+"	rush_solo2	
+
+	Rush : Anime edits	
+
+	yuki_san35	
+
+	yuki	
+
+	animeedit_20	
+
+	anime.edit_20	
+
+	evelyn_bst	
+
+	𝐄𝐯𝐞𝐥𝐲𝐧 💕👀	
+
+	garfield.hp2	
+
+	Garfield	"
+
+"	notsa_ki	
+
+	𝙎𝙤𝙣𝙤𝙩	
+
+	iambemax	
+
+	Maxim Bemax Cherkassky	
+
+	space_anime_edit	
+
+	SHARIFZODA	
+
+	moepimoepi_	
+
+	もえぴ🐰	
+
+	azaireonlyy	
+
+	Azaire	"
+
+"	wk540255	
+
+	WK2	
+
+	ustinov.arm	
+
+	𝐔𝐬𝐭𝐢𝐧𝐨𝐯 𝐃𝐚𝐧𝐢𝐥 🇰🇿Сотрудничество и реклама➡️Direct	
+
+	misida_mita	
+
+	981115doreen	
+
+	ㄓㄓ葡萄果粒🍇	
+
+	lamimzi	
+
+	梓	
+
+	hoomaru_yname	"
+
+"	Hoomaru Ynamée	
+
+	country_guatemala_sovietico	
+
+	Emanuel Hernández	
+
+	stelle_.gloria	
+
+	Stelle ✨	
+
+	l_krito_l	
+
+	&_𝖐𝖗𝖎𝖙𝖔_&	
+
+	joestar_dagoat	
+
+	Joe_dagoat🎯|60k	
+
+	cryomiside	"
+
+"	cryom1side	
+
+	trstm_2006	
+
+	ᅟTRSTM	
+
+	saya_scarlet	
+
+	Saya Scarlet	
+
+	1.otkir.2__	
+
+	一人で	
+
+	liwnq_00012238	
+
+	𝐋𝐖𝐐	
+
+	uuromi.z	"
+
+"	lzy	
+
+	why_less_	
+
+	whyless	
+
+	crazy.taiwan	
+
+	瘋狂的台灣人 😵‍💫	
+
+	danuulhoctinnbarin	
+
+	Danuulhoctinbarin	
+
+	broccoli	
+
+	Memes & Videos	
+
+	mita_daisuki	"
+
+"	k4zuya.fx	
+
+	ᴋᴀᴢᴜʏᴀʕ•ᴥ•ʔ	
+
+	angelcalistenia1	
+
+	Entrenador de Calistenia	
+
+	6uo.memehk	
+
+	迷因樂園💦	
+
+	odilov.editz	
+
+	ODILOV🥷🏿	
+
+	allyissleepyyy	
+
+	♡ ally ᶻ 𝗓 𐰁 .ᐟ	"
+
+"	ai7exp	
+
+	Ai7exp	
+
+	daisuke_eijy	
+
+	yejin	
+
+	unimedical_care	
+
+	Uni Medical care	
+
+	_.ki.06._	
+
+	小祥要是不在的話 我..	
+
+	user100223334	
+
+	肺霧	"
+
+"	neyller_	
+
+	ネイラー	
+
+	nimade_be	
+
+	Chao Nimade	
+
+	bitelonatural	
+
+	Willian Brito Piovezan	
+
+	bigjeffpro	
+
+	Jefferson Santos	
+
+	kurokiba_677	
+
+	Zihad	"
+
+"	123478dsb	
+
+	Kent	
+
+	ggyoung5278	
+
+	新世紀迷因戰士	
+
+	crane.rasool	
+
+	you_and_i_cutie	
+
+	可爱熊🐻🐾	
+
+	ualikhanasemkz	
+
+	Ualikhan Asemgul Kekilbaikyzy	
+
+	13__asco	"
+
+"	asco.	
+
+	im_bageldog	
+
+	貝狗大王	
+
+	woshinilong	
+
+	Wo_shi_nai_long	
+
+	iwanteatmc	
+
+	JM ＿FYC	
+
+	dusky.ae_	
+
+	Dusky	
+
+	brunobestgg2	"
+
+"	Bruno Rohling	
+
+	ov3r1ord.official	
+
+	КАРАТЕЛЬ	
+
+	cuhp_edit	
+
+	Cuhpedit	
+
+	cloudz2_	
+
+	☁⻬衣𝓒𝓵𝓸𝓾𝓭𝔃衣⻬☁	
+
+	hahafunnyhaha_24	
+
+	by.iskaa	
+
+	𝒊𝒔𝒌𝒂	"
+
+"	natsuki.zd8	
+
+	Natsuki Subaru ZD8	
+
+	surfguan	
+
+	Tingkun Lo	
+
+	kiwichiii	
+
+	kiwi	
+
+	fr_kisho_	
+
+	DTX_KISHO🤍❄️	
+
+	kotdmolly	
+
+	⸸MOLLY⸸	"
+
+"	animepalace.new	
+
+	Anime realm	
+
+	j1nwoo.7	
+
+	Jin-woo	
+
+	insta_vidiios	
+
+	insta_vidios	
+
+	hv_cablejointer	
+
+	Harvey Ross ⚡️	
+
+	star_0p_yt	
+
+	Ankit Raj	"
+
+"	kurokurostar	
+
+	kuro kuro star	
+
+	k1do_kun	
+
+	reinwirly	
+
+	Reinwi	
+
+	ani.vault	
+
+	Anime Vault	
+
+	lawtendertwitch	
+
+	Lawtender	
+
+	gto_588	"
+
+"	H	
+
+	ookami.ae	
+
+	ookamisan	
+
+	stayfollowedchallenge	
+
+	Try to Stay Followed Challenge	
+
+	goldblue2020	
+
+	深藏Blue	
+
+	anime_edt.vd	
+
+	☄️☠️🗿	
+
+	nessthekid823	"
+
+"	Ness The Kid	
+
+	17.need	
+
+	ヅ17ᴺᴱᴱᴰ.ᴱᴰᴵᵀヅ	
+
+	periotix	
+
+	periotix.memes	
+
+	whnzqynbdhs123	
+
+	猫 meme	
+
+	junn_is_heree	
+
+	Niceguyjunn	
+
+	majorkalosangeles	"
+
+"	МАЖОРКА LOS ANGELES	
+
+	so_yeeyee	
+
+	Soyee	
+
+	herrflachpfeife	
+
+	herrflachpfeife	
+
+	boburjon_edits	
+
+	ᥫᩣ	
+
+	nactve.official	
+
+	uz_editzz	
+
+	Kapalak Tv	"
+
+"	ziqing_yang7	
+
+	YangZiQing	
+
+	giyuu_senpai_	
+
+	Tᴏᴍɪᴏᴋᴀ Gɪʏᴜᴜ	
+
+	_editsbybilly	
+
+	𝓑𝓲𝓵𝓵𝔂	
+
+	anime_vcg	
+
+	sanji_bx	
+
+	your_amazinglife	
+
+	Funny videos | Memes	"
+
+"	mosdisplay.live	
+
+	Mosdisplay LIVE 🟢	
+
+	catsigmas	
+
+	𝘊𝘢𝘵𝘚𝘪𝘨𝘮𝘢𝘴	
+
+	prod.inxky	
+
+	𝚒𝚗𝚡𝚔𝚢	
+
+	dishant_tech	
+
+	Dishant	
+
+	iam_ayush_.singh	
+
+	👑Ayush_Singh👑	"
+
+"	18__uzb	
+
+	🇺🇿	
+
+	zhero2027	
+
+	Zhero Edits	
+
+	walk_in_hongqiao	
+
+	hongqiao	
+
+	meester_edits	
+
+	Chiel Meester	
+
+	speeduniverse79	
+
+	Ishow Speed	"
+
+"	mita_1.9	
+
+	MITA	
+
+	dailymiside	
+
+	Cappie	
+
+	smertny_greh_	
+
+	𝒫𝒜𝒩𝒟𝒪ℛ𝒜	
+
+	mer.visuals	
+
+	MER	
+
+	pzxep1tsu.tt	
+
+	pzxepitsu	"
+
+"	r1lika	
+
+	mita.everyday	
+
+	Mita	
+
+	azmail.ae	
+
+	AZMAIL SK	
+
+	doniyor_sw_	
+
+	Дикий👿	
+
+	alex_dudick	
+
+	Alex Dudick	
+
+	starlilyxx	"
+
+"	Lily Star	
+
+	buzzfeed_intern	
+
+	Caniac	
+
+	nuonuo.727	
+
+	Nuo Nuo	
+
+	beek_pb	
+
+	𝖇𝖊𝖊𝖐 𝖊𝖉𝖎𝖙𝖘 ࿐	
+
+	goblingogo_tw	
+
+	哥布林本哥	
+
+	jimmy_ai_art	"
+
+"	Jimmy AI Art Museum	
+
+	shiyan_2010	
+
+	宋诗妍💍💓	
+
+	indigotohell	
+
+	Christian Perez	
+
+	tiffanieelina_official	
+
+	ティファニー絵里菜	
+
+	mid_night2486	
+
+	深夜食堂	
+
+	chinese_history_66	"
+
+"	Chinese History｜中国历史	
+
+	taiwan_meme.fun	
+
+	台灣迷因	
+
+	ice_monster_m5	
+
+	Ice monster M5🥇	
+
+	vanilopa_inst	
+
+	VANI	
+
+	racist_user	
+
+	Brainrot memes	
+
+	bouncingballsclub	"
+
+"	ball bouncing	
+
+	predators98899	
+
+	大鱷🐊（八方來財）	
+
+	excel.1986	
+
+	Excel 1986	
+
+	ann2024_0808	
+
+	你的網路女友-小安	
+
+	vaenson.xx	
+
+	vaenson	
+
+	chemist_daily_	"
+
+"	Chemistry students | Chemist	
+
+	istunt_gomie	
+
+	Istunt Gomie | Performance Coach	
+
+	keepermk_wp	
+
+	Keepermk Gonzalez	
+
+	supersaiyancartii	
+
+	carter cleary 🦧	
+
+	smallwei0406	
+
+	小崴	
+
+	animation_comedy0	"
+
+"	animation	
+
+	m3melayvor	
+
+	Syruz Gerald	
+
+	deezly.editz	
+
+	Ɗ e e 💤 L Ƴ	
+
+	daigosaito87	
+
+	Daigo Saito	
+
+	top5refun	
+
+	Top 5 Refun	
+
+	kchaze	"
+
+"	Chase Soto	
+
+	stevens_madii	
+
+	mj	
+
+	mitamiside	
+
+	Mita	
+
+	_mita.0	
+
+	Mita	
+
+	mita_yyf	
+
+	mita	
+
+	l.e.u.n.g_c_c_c	"
+
+"	c.c.c.	
+
+	yaeikovbirhane	
+
+	𝚈𝙰𝙴𝙸𝙺𝙾𝚅 𝙰𝚂𝙼𝙰𝚁𝙴 𝙱𝙸𝚁𝙷𝙰𝙽𝙴 𝙰𝙻𝙰𝚈𝙾	
+
+	fit_arshia	
+
+	Arshia Goswami	
+
+	ivan_the_one	
+
+	Ivan Kukartsev	
+
+	50kg772	
+
+	胡綺77	
+
+	life_line_fitness_centre	"
+
+"	life_line_fitness_centre	
+
+	yuuuuug_0920	
+
+	海納︎︎ ><💢	
+
+	josephtumbarello	
+
+	Joseph Tumbarello	
+
+	andrejko.epta	
+
+	Andrew Wave	
+
+	insta__pochita__	
+
+	Insta Pochita	
+
+	denzogym	"
+
+"	Deniz	
+
+	random_videos.xd	
+
+	rndmpst	
+
+	vsafigureskating	
+
+	VSA | The first global skating platform	
+
+	el.gym.rat	
+
+	Memes de Gym 💪🏼🐁	
+
+	1xurshidkhan	
+
+	🖤	
+
+	gorilfaruk	"
+
+"	Ömer Faruk Müftüoğlu	
+
+	tareqalsaadiuae	
+
+	🇦🇪طارق السعدي🇦🇪 Tareq Alsaadi	
+
+	gordonyeung314	
+
+	𝗚𝗢𝗥𝗗𝗢𝗡 𝗬𝗘𝗨𝗡𝗚	
+
+	mamikoyoko	
+
+	Mamiko	
+
+	nanmen_qiao	
+
+	南門礄（我們的料理只會帶給美味和愉悅的心情）	
+
+	flosthetics_	"
+
+"	Flo Kopp | Transformation Expert	
+
+	egor_klimteam	
+
+	EGOR KLIMONOV	
+
+	leonjp_	
+
+	leonjp	
+
+	qwoooxy	
+
+	𝚀𝚠𝚘𝚘𝚡𝚢🫠	
+
+	kazumizawa_miyu	
+
+	kazumizawa miyu	
+
+	t0ji.zn	"
+
+"	Zen'in Toji	
+
+	jerii.9	
+
+	jerii.9	
+
+	godtatsuyaofficial	
+
+	God Tatsuya	
+
+	supernowfit	
+
+	🔥💪!! NowFit !! 💪🔥	
+
+	mumii.cos	
+
+	Mumi <3	
+
+	nuyuki.tt	"
+
+"	nuyuki.tt	
+
+	xirays.tt	
+
+	ʀᴀʏ 愛	
+
+	iamnotquinstott	
+
+	Quintan Stott	
+
+	kyze.ae	
+
+	Kyze	
+
+	strawhatvibe	
+
+	StrawHatVibe	
+
+	re.select_shop	"
+
+"	justordinaryid	
+
+	Just Ordinary	
+
+	jinyi_0217	
+
+	瑜xuann🌷	
+
+	animefyp__0	
+
+	A N I M E ❤️‍🩹⚡	
+
+	mumeix820	
+
+	むめい	
+
+	hamroqulov._.amir	
+
+	yu._0615_	"
+
+"	迷因小貓	
+
+	pecicilan_all_seriess	
+
+	𝕻𝖊𝖈𝖎𝖈𝖎𝖑𝖆𝖓 𝟮𝖘𝖙𝖗𝖔𝖐𝖊 𝖆𝖑𝖑 𝖘𝖊𝖗𝖎𝖊𝖘𝖘	
+
+	yamaha_alfa_jawatengah	
+
+	YAJT	
+
+	2strokelovers_id	
+
+	2 STROKE LOVERS INDONESIA 🇮🇩	
+
+	cctvbleyeran	
+
+	CCTV.BLEYERAN.ID	
+
+	story_fizr	"
+
+"	STORY_FIZR🔰	
+
+	shinykanish	
+
+	DBZ🐉	
+
+	bluefat1004	
+
+	莊紹恩	
+
+	wintruwalss	
+
+	wintruwalss	
+
+	demolition_news	
+
+	Mark Anthony	
+
+	iwantnostalgia_	"
+
+"	I Want Nostalgia	
+
+	scooter_kel	
+
+	Kelvin Ishmeal Gartei	
+
+	ko_tuning	
+
+	K.O PERFORMANCE	
+
+	karatelightning	
+
+	Karate Lightning	
+
+	bandupjaxs.v2	
+
+	Bandupjaxs	
+
+	funcional_do_pablo	"
+
+"	Pablo Dias	
+
+	lovepetrol	
+
+	Lovepetrol	
+
+	zhamangaraev_d	
+
+	Dulat Zhamangaraev	
+
+	patrox	
+
+	PATROX	
+
+	aristo_luis	
+
+	Aristo Luis 📍 Berlin	
+
+	bilalakki_	"
+
+"	Bilal	
+
+	oman.max.cars	
+
+	مصطفى الذهلي 🇴🇲	
+
+	xiaoxiaoshorts	
+
+	Xiao ｜Jada	
+
+	h_bu1ll	
+
+	Hk Balushii	
+
+	campusfunctionss	
+
+	Campus Functions ™️	
+
+	joshwei41319	"
+
+"	嫁許	
+
+	aaron_waving	
+
+	甩甩髮藝Aaron｜台南韓式燙髮｜霧感髮色｜	
+
+	findchrist_tw	
+
+	找到基督	
+
+	jckson44	
+
+	nakako_6uo	
+
+	☆中子☆Nakako凸	
+
+	cheokfanwong	
+
+	黃卓帆Paul	"
+
+"	nakamura_6uo	
+
+	純情小中村	
+
+	remzl	
+
+	𝓡𝓔𝓜𝓩𝓘	
+
+	freemediamovement	
+
+	FreeMediaMovement	
+
+	russelkop_	
+
+	Ethan	
+
+	edits_by_akka	
+
+	𝙰𝚔𝚊𝚜𝚑 𝙹𝚊𝚗𝚐𝚒𝚛	"
+
+
+  
+</div><div id="TextUntukFIGCAPTION" style="display:none;">
+
+  "	the_wizard_pasang	
+
+	The wizard Pasang	
+
+	oyatillo6828	
+
+	mrzongjiaotou	
+
+	Mr总教头	
+
+	anlst_dnb	
+
+	The Analyst	
+
+	amazinghuzhou	
+
+	AmazingHuzhou	
+
+	jjo_glass	"
+
+"	조유리 JO YURI	
+
+	koz.nana_	
+
+	its_super_sonia	
+
+	Sonia The Cat	
+
+	alvessszzz.__	
+
+	Alves	
+
+	winning_688	
+
+	神精病	
+
+	hadoublesan	
+
+	Hadoublesan	"
+
+"	dreambreakerz_elonsprite	
+
+	築夢者太陽☀️	
+
+	dreamrunnerz_seafoo	
+
+	築夢者大師(聖人模式中）	
+
+	drz_fatman	
+
+	築夢者杰哥	
+
+	suarezkumar	
+
+	Suresh Kumar	
+
+	rosssmith	
+
+	Ross Smith	"
+
+"	lubao250	
+
+	祿寶	
+
+	daijushudong	
+
+	玖苼陌萍树洞	
+
+	chung.yu.chi999	
+
+	Yolanda Chung	
+
+	kevinleelee996	
+
+	雨灵	
+
+	zs._.0708	
+
+	𝔽𝕀𝕊ℍ~🐟 ⁸¹⁰	"
+
+"	cvx_.bxn	
+
+	𝔴	
+
+	ironmuscledaily	
+
+	IronMuscleDaily	
+
+	pingpingdegushi	
+
+	萍萍的樹洞	
+
+	rita.chu0626	
+
+	Rita🔥🥀	
+
+	nice.o25	
+
+	daily_memo69	"
+
+"	Oh my god	
+
+	broccolivlog	
+
+	Youtuber/ 花椰菜	
+
+	nyneebae	
+
+	軟軟	
+
+	moti_vation__11	
+
+	Motivation 11	
+
+	dunkchen23	
+
+	陈登星	
+
+	cobiboys	"
+
+"	靠北男友	
+
+	ninibbyy__	
+
+	❤️	
+
+	lux._.304	
+
+	睡璇統治外星人🤏🏻	
+
+	whx._.162	
+
+	慧馨撞地球	
+
+	tatang.926	
+
+	Ting.	
+
+	mitsukirain	"
+
+"	ミツキ MIRO	
+
+	smileboy159s	
+
+	Smile Boy	
+
+	look_your_name_ok	
+
+	岳哥💫	
+
+	prettybaby.tw	
+
+	牛牛牧場 哞～	
+
+	trickskater_wen	
+
+	蕭俊文	
+
+	nazsnippets	"
+
+"	Naz	
+
+	asif__edition	
+
+	KENDRIXX	
+
+	clipking773	
+
+	ClipKing	
+
+	superherointraining	
+
+	Tevin Musara	
+
+	silvasolanoda	
+
+	Solano da Silva	
+
+	kirill_027rus	"
+
+"	🅚🅘🅡🅘🅛🅛 🅐🅨🅖🅘🅢🅔🅝🅞🅥	
+
+	0526agnes	
+
+	静	
+
+	sany_12_14	
+
+	˚₊‧꒰ა ..YNN.. ໒꒱	
+
+	cindy_yu1114	
+
+	Cindy Yu	
+
+	radii_media	
+
+	RADII	
+
+	mativ.gym	"
+
+"	𝐌𝐀𝐓𝐈𝐕 𝐆𝐘𝐌 👽	
+
+	xnovoo.o	
+
+	吴姵諠	
+
+	d00nuts__	
+
+	d00nuts	
+
+	tracyyliyingg	
+
+	𝗧𝗿𝗮𝗰𝘆	
+
+	heavenviewss	
+
+	Heaven Views	
+
+	lollipop_kxin	"
+
+"	𝓃𝑒𝓃𝒾 𝓃𝑒𝓃𝒾 𝓅𝓊𝓅𝓊 𝒹𝑒 可欣	
+
+	zxh___0621	
+
+	炸蝦監護人🍤	
+
+	amg_0811	
+
+	龘㡣龘	
+
+	stone1127_	
+
+	球評史東	
+
+	qqxiaoyien	
+
+	小伊恩	
+
+	_meowpaww	"
+
+"	Meow Paw	
+
+	rgthkiller	
+
+	T神⚡️ |電子攻略者|專業群組|1：1私帶|	
+
+	herexkauman	
+
+	HEREX KAUMAN	
+
+	howtogetjacked101	
+
+	Ver Kar	
+
+	lianwangxiaoya	
+
+	笑笑	
+
+	vandijkpictures	"
+
+"	Robert van Dijk	
+
+	primo_primates	
+
+	🐵🙈🙉🙊🐒	
+
+	6uo.memes	
+
+	迷因樂園🌿	
+
+	dimaviper_youtube	
+
+	DimaViper	
+
+	freakocean_m	
+
+	Freak Ocean	
+
+	swogenreal	"
+
+"	swogen	
+
+	gen.e_0727	
+
+	ᵍᵉⁿᵉ郑咏恩🐰	
+
+	bigmauretania	
+
+	RMS_MAURETANIA	
+
+	158_.yuu	
+
+	蔡小妤🎀	
+
+	singwo1118	
+
+	singwo	
+
+	itsme.aongfong	"
+
+"	aongfong.chayapat	
+
+	xz_7782	
+
+	建民	
+
+	ooooouuu_uuu.tuctuctuctuctuctu	
+
+	manson_0426	
+
+	𝕸𝖆𝖓𝖘𝖔𝖓 𝖂𝖆𝖓𝖌 🌊	
+
+	rimisliminci	
+
+	Rimisli Minci	
+
+	jaykindafunny6	
+
+	Jaykindafunny	"
+
+"	77_sunnyyy	
+
+	77	
+
+	little_bf_official	
+
+	최은석	
+
+	kurzvorderkatastrophe	
+
+	Kurzvorderkatastrophe	
+
+	uno.fx_	
+
+	fayzullo	
+
+	arm_wrestling_fanclub	
+
+	arm_wrestling_fanclub	"
+
+"	duanzhuangyang	
+
+	楊端妝	
+
+	silvia.black_	
+
+	Silvia Leibrock	
+
+	holysapoguapo	
+
+	SapoGuapo	
+
+	zakharova_kaetano	
+
+	Olga Zakharova Kaetano	
+
+	7778u_.ua	
+
+	顯眼寶🌟	"
+
+"	simple.putin	
+
+	Житейские ситуации одного известного человека	
+
+	flamegiddey	
+
+	leqso_lobzhanidze	
+
+	Leqso Lobzhanidze	
+
+	exe.aep01	
+
+	exe.aep	
+
+	refereechannel	
+
+	Referee Channel	
+
+	_ishowspeeddy_	"
+
+"	ɪᴍᴍᴏʀᴛᴀʟ⚡	
+
+	superreact_	
+
+	SuperReact 🔔	
+
+	henry._ds3	
+
+	Henry Aguilar	
+
+	franqdrive	
+
+	Franq Drive	
+
+	scary__cr7	
+
+	Shelby Shaa	
+
+	merki.life	"
+
+"	Merkelife | Merkilife | Мерке	
+
+	nikotoproller	
+
+	Niko Vera	
+
+	xiaomao077	
+
+	Xiao mao	
+
+	pilltot	
+
+	Cosplayer Reels Depot	
+
+	ayla.bilica	
+
+	Emanoela 🧡 Mamãe da Ayla	
+
+	glupious	"
+
+"	Glupious	
+
+	smaill_164	
+
+	سماعيل الزروال	
+
+	tovoj97799	
+
+	tovoj97799	
+
+	skinny.vinz	
+
+	Skinny Vinz	
+
+	armwreslin_g	
+
+	Denis	
+
+	jovi_song	"
+
+"	政爸	
+
+	liftscue	
+
+	LiftScue	
+
+	opp_football	
+
+	op_football	
+
+	sakinam__off	
+
+	🇸🇦	
+
+	laararosebackup	
+
+	Lara Rose Birch	
+
+	gymweirdos	"
+
+"	Benjamin Calvert	
+
+	chu.eight	
+
+	啾教主🎀쮸쮸	
+
+	nsfwstudio	
+
+	上班不要看	
+
+	99chu2023	
+
+	啾啾是吳慈敏🎀	
+
+	kingleutrim	
+
+	Leutrim Haxhija	
+
+	gymscenter	"
+
+"	GymsCenter	
+
+	hhhuuuccc.0	
+
+	Cc(*≧ω≦)	
+
+	ieatshortpeoplee	
+
+	Fardin Ahmed	
+
+	2ouer._	
+
+	Môno💊	
+
+	zack_rakzo	
+
+	亗ﾒ𝑳𝑬✘𝑼𝑺亗	
+
+	xdahafazlasi	"
+
+"	Daha Fazlası	
+
+	tekinvari	
+
+	Tekin	
+
+	love_2lift_from_south_east	
+
+	Remy	
+
+	momosic__	
+
+	是音樂也是回憶	
+
+	fk_projectt	
+
+	FK™ Project	
+
+	ur_legend_0x	"
+
+"	▄︻テY̷o̷u̷r̷ ̷s̷a̷n̷j̷i̷t̷══━一💥	
+
+	janu_edit__	
+
+	J ム N U 𝐞𝐝𝐢𝐭 ϟ 💀	
+
+	genuine_motivator	
+
+	Motivation | Growth | Finance	
+
+	autohub.3232	
+
+	AUTO hub community	
+
+	fudbol.edit17	
+
+	alexpereiramma	
+
+	Alex Pereira | FAN PAGE	"
+
+"	mr.tricepp	
+
+	Akki.....	
+
+	monarchmetals	
+
+	MONARCH METALS LTD	
+
+	lin.shenyuan	
+
+	小林	
+
+	caricature_daniya	
+
+	singh_pnkj1k	
+
+	pankaj singh rajput	
+
+	corrida.lovers	"
+
+"	corrida.lovers	
+
+	pet_2524	
+
+	喵汪劇場	
+
+	cats.lover.gram	
+
+	CATS LOVERS	
+
+	_car_only__	
+
+	amg	
+
+	jeremyfragrance	
+
+	Jeremy Fragrance	
+
+	sophiniweenie	"
+
+"	Soweenie	
+
+	boston_carsale	
+
+	by.bexa	
+
+	omyisnobody	
+
+	ɪᴍ ᴏᴍʏ ×͜×	
+
+	rich_troll_face	
+
+	Bexruz Janiqulov	
+
+	xianlugue	
+
+	Xian Lugue	
+
+	cat_sdays	"
+
+"	catsday	
+
+	jdmphxnk	
+
+	JDMPHXNK AKA TAPE STOP MANE	
+
+	jyphoto213	
+
+	Jy Tan	
+
+	luluandsesame	
+
+	lulu与芝芝	
+
+	ynn._212	
+
+	小软糖(՞ . .՞)	
+
+	instrusivethoughtswinn	"
+
+"	IntrusiveThoughtsWin	
+
+	jist.news	
+
+	Jist	
+
+	seeeli.hfm	
+
+	Seli	
+
+	rcdrifttok	
+
+	RCDriftTok	
+
+	enamul___hoqe	
+
+	Enamul Hoqe	
+
+	supervillaindeathmatch	"
+
+"	SuperVillainDeathMatch	
+
+	chriscarterprow	
+
+	Chris Carter	
+
+	catsmellsgood	
+
+	有貓進來吸	
+
+	kong.news	
+
+	港新聞 Kong News	
+
+	kong.news2	
+
+	港新聞2.0	
+
+	lovely_lee_cn	"
+
+"	naishi 나이시 💕	
+
+	y.yut21_	
+
+	于庭🐨	
+
+	sphotory	
+
+	SPhotory Production	
+
+	tjcc798_	
+
+	童錦程798	
+
+	da.niel.74	
+
+	taktstörer	
+
+	agi_takagi	"
+
+"	Agi Sutiagi	
+
+	reepostz	
+
+	Memes	
+
+	wujj5308	
+
+	跩跩	
+
+	zarnab.lashaari	
+
+	Zarnab Khan Lashari	
+
+	danilowerss	
+
+	Danial Jamshidi	
+
+	rising.tech	"
+
+"	Technology • Gadgets • Tools	
+
+	thartpage	
+
+	Art | Drawings | Creative Work	
+
+	melven_jong1109	
+
+	MelvenJong🙈	
+
+	xsirub	
+
+	xꜱɪʀᴜʙ	
+
+	emmi_royse	
+
+	ЭМИ РОУЗ	
+
+	funnygod.cc	"
+
+"	搞笑神人	
+
+	mfmf5269	
+
+	我的D槽	
+
+	__dlgksmf	
+
+	하늘	
+
+	ntt.group	
+
+	NTT GROUP	
+
+	bun3yamk	
+
+	teknologyoo	
+
+	TECHNOLOGY00	"
+
+"	samanlangkimuksor	
+
+	Samanlangki Muksor	
+
+	teiskhem_channel_page	
+
+	kigos_golf	
+
+	스포츠산업기술센터 공식 인스타그램	
+
+	summer_7897	
+
+	蘇嘎嘎	
+
+	apala__applee	
+
+	عاشق تحديات 😵‍💫☠️	
+
+	___tar.fish	"
+
+"	Fish	
+
+	jhonjayar	
+
+	Jhonjayar Alegria Barado	
+
+	haohaoxiao.tw	
+
+	Cheems｜貓meme小劇場	
+
+	ling.ah_811	
+
+	🐢小盆友🐷	
+
+	dinixdream	
+
+	Dinixdream	
+
+	realgfai	"
+
+"	Realgfai	
+
+	_elnur_cx	
+
+	Elnur Boynazarov	
+
+	wtkmiki_	
+
+	みき ¨̮	
+
+	888heilong	
+
+	paky_twc	
+
+	PAKY🇮🇹	
+
+	python_is_trash	
+
+	jumybear	"
+
+"	Jooli Lee	
+
+	emilyjeannephillips_	
+
+	Emily Jeanne Phillips	
+
+	cuk_oturrdu	
+
+	Cuk Oturdu	
+
+	qinhuoba	
+
+	秦火把	
+
+	weyh.ac	
+
+	WEYH.AC 	
+
+	billiedittt	"
+
+"	Billieditt	
+
+	maturalni	
+
+	Maturalni.com | Kursy maturalne	
+
+	pumpkin_cats_eat_dialy	
+
+	space.h.pj	
+
+	SPACE 品婕｜公主切層次剪｜女生髮型專門	
+
+	arya_sistem33	
+
+	arya_sistem	
+
+	linglom2002	
+
+	Linglom🤍	"
+
+"	tpooc	
+
+	Out Of Control	
+
+	mancingyuk.idn	
+
+	Forum Mancing Indonesia	
+
+	xiaozaok2	
+
+	jujube°	
+
+	linm1014	
+
+	Naomi 小孟 🌸	
+
+	td_5898	
+
+	劫富濟貧｜廖添丁♠️	"
+
+"	foocey	
+
+	⇝︎ 𝙢𝙚𝙢𝙚𝙨 ⇜︎	
+
+	jinglebellsbrazileiro	
+
+	cyu._09	
+
+	許芭ㄌㄜˋ 🎀🤍	
+
+	luis01bc	
+
+	Luis Bolívar	
+
+	aster_trina	
+
+	Trina-崔娜	
+
+	chloe.1223.tw	"
+
+"	chloe〔晨熙〕☀️	
+
+	an.an.1019	
+
+	陌安安安🐍	
+
+	flame_925	
+
+	*✧煙煙✧*	
+
+	fireworksfails	
+
+	Fireworks gone wrong	
+
+	maxhuang04	
+
+	M8喝酒老實說（威士忌）	
+
+	bestvidio04	"
+
+"	Machine talent	
+
+	crf.cp	
+
+	阿福夫妻 | Crf300 x Crf150 凹豆旅程	
+
+	wolff4you	
+
+	ℝ𝕖𝕟𝕖 𝕎𝕠𝕝𝕗𝕗 | Aquaristik | Wabikusa | Aquascaping	
+
+	fringething	
+
+	奇異世界	
+
+	hnk_.qv0	
+
+	🫠💖	
+
+	multi.laugh	"
+
+"	Mutilaughing	
+
+	djgg_official	
+
+	Jihee han	
+
+	klewkarm	
+
+	Kung Chaiyo Klewkarm	
+
+	commander_dragon__sun	
+
+	Yanlong Sun	
+
+	khnintshil	
+
+	Khnin Tshil	
+
+	narcosis27	"
+
+"	Mike Winkles	
+
+	mostlyrei	
+
+	otracyo8	
+
+	🤓	
+
+	i_m_leave_	
+
+	I m leave	
+
+	yyu10.2	
+
+	𝑌𝑌𝑈	
+
+	chinesepartner.china	
+
+	ChinesePartner	"
+
+"	taiwanrockguy	
+
+	Jimmy  The Taiwan Rock Guy	
+
+	claire.luvs.sushi	
+
+	Mary Claire	
+
+	lingnako	
+
+	愛修圖的月老師	
+
+	takou._.cosplay02	
+
+	你的章魚	
+
+	batteryironman	
+
+	Battery Iron Man	"
+
+"	mcmenordoalvorada	
+
+	Mc Menor Do Alvorada	
+
+	mcmnofc	
+
+	MC MN	
+
+	e.prasko	
+
+	Есфирь	
+
+	winnie12225	
+
+	倩倩	
+
+	cplyy	
+
+	♡一个非常有意义的爱情故事	"
+
+
+</div><div id="TextUntukP" style="display:none;">
+  
+  "	spotto_aus	
+
+	Spotto	
+
+	caa94533	
+
+	含笑半步癲	
+
+	ani3small_meme	
+
+	尛迷因 BY 阿尼尛	
+
+	sbah_al_hear	
+
+	Day100🙂	
+
+	kitty.sweety_	
+
+	kitty超甜	"
+
+"	epic_technology1	
+
+	Epic Technology	
+
+	mohsify	
+
+	محسن بدون  ک  | mohsen	
+
+	yinger_0609	
+
+	小穎ᰔᩚ🤍	
+
+	h_arima_	
+
+	有馬	
+
+	tyopc.01	
+
+	安吉拉超酷	"
+
+"	streichbruder	
+
+	Streichbruder	
+
+	sharoneeng	
+
+	Sharone 宇恬	
+
+	porxz	
+
+	-ˋˏ✿𝗣𝗜𝗚𝗚𝗬🍰ˎˊ-	
+
+	x232221	
+
+	🌐希望 のぞみ	
+
+	jokesonthreads	
+
+	趣聞脆事	"
+
+"	muhammii294	
+
+	Muhammad Rifai	
+
+	tarot_clesdy	
+
+	塔罗师clesdy	
+
+	qing_0749	
+
+	77	
+
+	milton_wang_9433	
+
+	Wang_ErhHsi_9433	
+
+	do_vis._	
+
+	搞笑的靈魂	"
+
+"	vibeon68	
+
+	休閒一下	
+
+	ukiyo_e_shit_2000_v2	
+
+	浮 世 穢 両 仟 Ｕｋｉｙｏｅ Ｓｈｉｔ ２０００ V2	
+
+	therightisright_tw	
+
+	右吾右	
+
+	jia_jia_1125	
+
+	sbsb_amusing	
+
+	生活難搞 笑笑就好	
+
+	happy___chill	"
+
+"	笑嗨嗨	
+
+	epixcomedyy	
+
+	27	
+
+	raisheditz	
+
+	bikelandusa	
+
+	Bikeland	
+
+	numeioo	
+
+	uglyplankton	
+
+	Ugly Plankton	
+
+	chennuanyang	"
+
+"	陈暖央(•͈˽•͈)	
+
+	luckymanzano	
+
+	Luis Manzano	
+
+	ellennnnn___	
+
+	Ellen 🍓君闻	
+
+	ragga001	
+
+	Ragga Magnusdottir	
+
+	dianashulha	
+
+	Diana 💎	
+
+	petmatefamily	"
+
+"	PetMateFamily	
+
+	hedy.021_gyoung	
+
+	Hedy 赫蒂♡	
+
+	piyanistbnabiraak	
+
+	piyanist bana bırak	
+
+	love._.10_07	
+
+	林驛矗	
+
+	mh.y.y._	
+
+	小堇	
+
+	asiansvibes	"
+
+"	Beautiful Asian Girls	
+
+	_trollfaceedit_	
+
+	trollface_edits	
+
+	krossstudio	
+
+	Kross Studio	
+
+	cacador_4	
+
+	★ CAÇADOR TV ★	
+
+	_flora0910	
+
+	橙橙	
+
+	bexruz._.22_	"
+
+"	Behruz🦈	
+
+	irshaddd____	
+
+	IRSHADD 💫	
+
+	mr.zo7lo9	
+
+	𝘼𝙝𝙢𝙚𝙙 >> 🚷🦇	
+
+	kumaplaysgtr	
+
+	kumas🧿	
+
+	sultan_stylo	
+
+	Sultan Stylo	
+
+	easy_wyn	"
+
+"	C	
+
+	mino_ceo	
+
+	MINO UG🇺🇬	
+
+	sigma_cat_daily	
+
+	sigma cat 🐈	
+
+	paulpaghent	
+
+	Paul Paghent	
+
+	0919.oxo	
+
+	吖芙	
+
+	basha_.elbalad1	"
+
+"	باشاااا البلد	
+
+	dg_5758	
+
+	丁書吉	
+
+	cheergirlscam	
+
+	球場公務員	
+
+	douyinmar_	
+
+	抖音 ‖ 快手 ‖ DOUYIN‖ 女神 ‖ 正妹	
+
+	umidjon__871	
+
+	𝖀𝖒𝖎𝖉𝖏𝖔𝖓 ☪	
+
+	mikaela_0708i	"
+
+"	💗儒儒兒💗	
+
+	zera1104	
+
+	Zera Cheng	
+
+	k.jzu_	
+
+	妤昀	
+
+	mccallumrockdrilling	
+
+	McCallum Rock Drilling	
+
+	dealerofreels	
+
+	Dealer Of Reels	
+
+	skiingsworld	"
+
+"	SKIING | SKI	
+
+	7q.weeee	
+
+	Vinayak Anil	
+
+	fireworks_fail_video	
+
+	Fireworks_fail_video	
+
+	ben_blue	
+
+	BEN BLUE	
+
+	ovr_sonu_1k	
+
+	JAGADISH KUMAR SINGH	
+
+	haviza.love	"
+
+"	haviza	
+
+	cats_ej	
+
+	KAwaii Cats	
+
+	wu_99_14	
+
+	Ava 	
+
+	betsy_real	
+
+	Betsy Бэтси	
+
+	annamaria.iankovskaia	
+
+	Maria Iankovskaia	
+
+	supercoolxiaotian	"
+
+"	李天	
+
+	rio_2gg2	
+
+	Ssa Rio	
+
+	_8yijun	
+
+	Y	
+
+	vlogger_deepak_bhai	
+
+	Vlogger Deepak bhai	
+
+	boom_pyro925	
+
+	BOOM KING	
+
+	kaito._.fi._.n	"
+
+"	第2人格♪吉娃娃🥀	
+
+	besttdream_girl_	
+
+	besttdream_girl_	
+
+	magnusrugcleaning	
+
+	Magnus Rug Cleaning	
+
+	yitang6290	
+
+	做我的貓🐱	
+
+	zloi_meloman	
+
+	Музыка l Мемы	
+
+	youjyunhao	"
+
+"	Jyun Hao	
+
+	lookxmaxxing	
+
+	looksmaxxing 🏄	
+
+	memelandcenter	
+
+	zerocnc	
+
+	Zero Tolerance LLC	
+
+	54char.lie	
+
+	查理👾	
+
+	zhangle133	
+
+	张乐	"
+
+"	asianradiance	
+
+	Asian Girls	
+
+	chinalifenews	
+
+	ChinaNews	
+
+	benmustafakaraca	
+
+	Mustafa KARACA	
+
+	utkirxorazm	
+
+	Гатчина Хоразм Урганч	
+
+	swemachinist	
+
+	Daniel Jansson	"
+
+"	xi_aoxiao6812	
+
+	ZC Used machines_china	
+
+	bearded.guy.alpha	
+
+	Bearded Guy	
+
+	y__na6o3	
+
+	碼森⚡️	
+
+	crimsonmoon1974	
+
+	yun.yao_song	
+
+	咻！✨	
+
+	ljc_58801	"
+
+"	程珈	
+
+	pimpanzel	
+
+	𝐏𝐈𝐌𝐏𝐀𝐍𝐙𝐄𝐋 | 𝘗𝘈𝘙𝘈𝘕𝘖𝘙𝘔𝘈𝘓𝙈𝙀𝙈𝙀𝙎 𝘿𝘼𝙄𝙇𝙔	
+
+	green_alien_man	
+
+	Green Alien	
+
+	pupsekomemo	
+
+	shit_baiano071	
+
+	shitpost_baiano071	
+
+	arz_abhi_edits	
+
+	It's_abhi_ae.	"
+
+"	kimnoha._.21	
+
+	김노하	
+
+	kiwy1025	
+
+	樂群 Jim	
+
+	zhoshentv	
+
+	美人纪	
+
+	jplus_with	
+
+	제이플러스 승무원학원💗연희쌤🎀 (원장쌤)	
+
+	mmdactiv	
+
+	اینجا جات امنه-STAY WIT ME	"
+
+"	huiylo_blayt	
+
+	Brncll	
+
+	edwininai	
+
+	Edwin Yee | work smart work easier 😎	
+
+	lester0313_____	
+
+	L M L	
+
+	kepubaikejun	
+
+	靠譜百科菌	
+
+	birdtalkmeme	
+
+	講鳥話迷迷 Bird Talk Meme	"
+
+"	t.tiffany.y	
+
+	劉瑋晞 Tiffany Cosplay	
+
+	aspirin42195	
+
+	阿斯匹靈42195米	
+
+	aqqqqq.91	
+
+	忧郁的科比69	
+
+	who_love99	
+
+	凌晨三點鐘	
+
+	mmas2ool	
+
+	مصدر مسؤول	"
+
+"	carl.linxiang	
+
+	Carl Chen	
+
+	mcgee	
+
+	Danny McGee	
+
+	mfpharaoh	
+
+	hi	
+
+	memememeeeee_	
+
+	今年破一萬	
+
+	hellcamtv	
+
+	HELLCAMTV	"
+
+"	16_yang	
+
+	🐑筑筑 ྀི	
+
+	crashzonecnc	
+
+	ርዪልነዘጊዐክቿ	
+
+	miniiretro	
+
+	Pocket Buddy	
+
+	cash085138	
+
+	搞笑的師兄	
+
+	lixiaoming6039	
+
+	李晓明	"
+
+"	adminispwd	
+
+	adminispwd	
+
+	kangfrvr	
+
+	KANG FOREVER!	
+
+	im_erjixia	
+
+	耳机侠	
+
+	abdulhay_xaqberdiyev	
+
+	Abdulhay Xaqberdiyev	
+
+	woshicaixuann_	
+
+	彩琁	"
+
+"	imove_study	
+
+	✺꯭🦅𝑩𝒐𝒚𝒎𝒊𝒓𝒛𝒂𝒚𝒆𝒗✺꯭🦅	
+
+	peopleexplodingthings	
+
+	People exploding things	
+
+	jiaxin_is_me233	
+
+	jiaxin	
+
+	yuaion_	
+
+	Alice	
+
+	weewee.daily	
+
+	Weewee Cat Daily	"
+
+"	bebe0503_	
+
+	蘿菈	
+
+	s.c._.s.c	
+
+	ᴄʜɪɴɢ	
+
+	trip_creator_	
+
+	여행 이야기	
+
+	acheng_channel	
+
+	阿城與雪兒	
+
+	1.xyii_	
+
+	nya.0n	"
+
+"	ɴᴇᴋᴏᴛᴀ	
+
+	whenever_anson	
+
+	Anson 陳冠齊 臺北中山區燙髮推薦 ｜層次輕羽髮｜ 韓國燙髮｜ 霧感髮色	
+
+	py__1106	
+
+	木子	
+
+	17.0511_20	
+
+	彤彤ᯤ⁵ᴳ	
+
+	alexanderku4er_official2	
+
+	Alexander Suntcov	
+
+	kuaking_1231	"
+
+"	跨跨 kua~	
+
+	eren_lenox	
+
+	Eren Lenox	
+
+	darked_zone	
+
+	DARK_ZONE💀	
+
+	tobi_brasil	
+
+	tobi_brasil oficial	
+
+	thinkaboutzurri	
+
+	Gilang Azzx	
+
+	__yu.10z	"
+
+"	葉小🐟	
+
+	dailycat__hardtek	
+
+	𓃠 𝐃𝐚𝐢𝐥𝐲𝐂𝐚𝐭__𝐇𝐚𝐫𝐝𝐭𝐞𝐤 𓃠	
+
+	simple.0370	
+
+	муж.uz	
+
+	daily.ah.cat	
+
+	Daily ah cat	
+
+	diabolical_art8	
+
+	Diabolicalart	
+
+	welders_club	"
+
+"	Welders_club	
+
+	fozil.mem	
+
+	fozil.mem	
+
+	h.gihyeon	
+
+	홍기현	
+
+	repostowlytheowl	
+
+	RepostOwly	
+
+	ak101828	
+
+	林妍希	
+
+	catcat._.cake	"
+
+"	cat cat	
+
+	puikateee	
+
+	🩹 ⁺ 沛蕎係喊包𓂂𓏸🤍	
+
+	eul_jj	
+
+	gueul_couple	
+
+	구을부부	
+
+	t_070_a	
+
+	ثامرثمره	
+
+	qwooxy.tt	
+
+	𝖰𝗐𝗈𝗈𝗑𝗒	"
+
+"	darkk.jokes_	
+
+	Darkk	
+
+	muyan_happy	
+
+	沐言開心醬	
+
+	yuyun_0518_	
+
+	YY	
+
+	_.yyan.y	
+
+	Yanice	
+
+	_meme_struation	
+
+	Meme_struation	"
+
+"	2ramadan5	
+
+	Ramadan 25	
+
+	professorviniciusanflor	
+
+	Vinicius Anflor - Professor 2 tempos	
+
+	sintonizador2t	
+
+	Vinicius Anflor | professor 2 tempos	
+
+	d.y.s_records	
+
+	D.Y.S Records	
+
+	doggo.catto.singgo	
+
+	Chinese sing video	"
+
+"	_bossnobita_	
+
+	_ N O B I T A _	
+
+	bestonly.ai	
+
+	Best only ai	
+
+	pierocgrieco	
+
+	Pietro Grieco	
+
+	litvinov.fit	
+
+	KIRILL LITVINOV	
+
+	jen3yu	
+
+	Jenny	"
+
+"	sound_of_cappiness	
+
+	If happiness had a sound	
+
+	aaa.___l	
+
+	𝖆𝖕𝖗𝖎𝖑𐀔	
+
+	bulgogifarts	
+
+	113	
+
+	rjd_imran_king1	
+
+	Imranalam Imran	
+
+	push.music.songs	
+
+	PushMusicSongs	"
+
+"	ly6nx_ene	
+
+	˗ˋˏ꒰ঌ 黎奈 ໒꒱ྀིˎˊ˗	
+
+	_ansh.am.0	
+
+	Shivam tiwari 🤍	
+
+	kangsboekit	
+
+	Ardiansyah Boekit	
+
+	meow.meme.w	
+
+	三小熊	
+
+	aly45rs	
+
+	🔹𝐀𝐥𝐲 (🫶🏻𝐑𝐨𝐡𝐢𝐭𝐢𝐚𝐧💙)	"
+
+"	monke.listening.to.music	
+
+	Monkelisteningmusic	
+
+	thunder_editz_04	
+
+	𝐓𝐇𝐔𝐍𝐃𝐄𝐑 𝐄𝐃𝐈𝐓𝐙	
+
+	dingyao897	
+
+	丁燿	
+
+	sa_niniii	
+
+	맛있게 먹으면서 다이어트 ◡̎	
+
+	superinnovators	
+
+	Superinnovators	"
+
+"	gemdzq527	
+
+	溫柔只給棋	
+
+	world_of_engineering	
+
+	World of Engineering	
+
+	kuvaldaru	
+
+	⚡️Кувалда.ру⚡️	
+
+	kathy.to	
+
+	✧*𝙆𝙖𝙩 𝘾𝙖𝙩 ☆*.+ﾟ🐈‍⬛	
+
+	amanolamey_	
+
+	Amano Lamey	"
+
+"	exploding.stuff	
+
+	Stuff Exploding	
+
+	rabbiilovey	
+
+	趙兔兔 ♡ TuTu	
+
+	indicator_species	
+
+	Nick Stacey	
+
+	mr_psychosis_world	
+
+	You don’t know me	
+
+	wildboysclub_	
+
+	theboyscentral_	"
+
+"	The Boys Central	
+
+	andylu0705	
+
+	盧紹植	
+
+	compared_comperison_part.2	
+
+	Sophiyan Khan	
+
+	kurdish.chemist	
+
+	⌬ KURDISH CHEMIST ⌬	
+
+	the_inexplicable_	
+
+	The Inexplicable🔹	
+
+	jp_hahatravel	"
+
+"	搞笑綜藝影片	
+
+	war_shot2023	
+
+	війна в Україні - war in Ukraine🇺🇦	
+
+	night_vibes3	
+
+	N I G H T V I B E S	
+
+	video_00010	
+
+	笑笑男孩	
+
+	kng_alone_as	
+
+	もっとジャンプして	
+
+	su.yuteng	"
+
+"	蘇育騰	
+
+	yi.lin_0209	
+
+	王誼琳	
+
+	loe_life_of_excellence	
+
+	L.O.E	
+
+	arctosuccess	
+
+	ArcToSuccess | Motivation | Luxury	
+
+	mainlanderssportfishing	
+
+	Brandon Wootton	
+
+	weiyao_khoo09	"
+
+"	kwy	
+
+	zephyranae	
+
+	Zephyranae Memes	
+
+	ganen_168	
+
+	感恩	
+
+	100._.09_09	
+
+	幸福無緣.	
+
+	oko_ua	
+
+	ВСЕВИДЯЩЕЕ ОКО 👁	
+
+	lookintoscience	"
+
+"	Look Into Science	
+
+	wx_t_t_t	
+
+	Bobur Bobur	
+
+	theswingman_	
+
+	Jeremy Nowak	
+
+	rusbolo	
+
+	Ruslan Ero	
+
+	maiduspace	
+
+	MaiduSpace	
+
+	sit.on.your.faith	"
+
+"	Faith Flame 😈	
+
+	hosumanwer	
+
+	حُسـام	
+
+	livejn	
+
+	New York City’s Most Wanted	
+
+	dareyked	
+
+	Dareyked	
+
+	memebr.ofc_	
+
+	Memebr.ofc_	
+
+	eyeswideclimbing	"
+
+"	Eyes Wide - Climbing  Motivation & Adventure	
+
+	juju._.o_o0_0	
+
+	Juju💐	
+
+	thishowthingswork	
+
+	How Things Work	
+
+	itz_ashish.69	
+
+	Aashish	
+
+	hz_9457	
+
+	洪圖大展	
+
+	whisperain_7414	"
+
+"	巴巴賽亞	
+
+	creation_with_sm	
+
+	creation_with_sm	
+
+	wtfmemes7788	
+
+	花惹法克迷因	
+
+	wtf.shark.bro	
+
+	先躺一步了	
+
+	parsfly	
+
+	ParsFly Hosseini	
+
+	coldcake3231	"
+
+
+</div>
+
+<script>
+(function(){
+  const blogId = "3878198361264397837";
+  const startIndex = 11;
+  const maxResults = 50;
+  const cacheKey = "footerGalleryCache";
+  let imageCounter = 0;
+  const feedLabel = "blog3"; 
+  const container = document.getElementById("ingganinggraFooterGallery");
+
+  function extractQuotedText(id) {
+    const rawText = document.getElementById(id)?.textContent || '';
+    const matches = rawText.match(/"([^"]+)"/g) || [];
+    return matches.map(t => t.replace(/"/g, '').trim());
+  }
+
+  const altTexts = extractQuotedText("TextUntukALT");
+  const figCaptions = extractQuotedText("TextUntukFIGCAPTION");
+  const h3Titles = extractQuotedText("TextUntukH3");
+  const pTexts = extractQuotedText("TextUntukP");
+
+  const hostnameParts = window.location.hostname.split('.');
+  let rawSubdomain = hostnameParts.length > 2 ? hostnameParts[0] : 'default';
+  rawSubdomain = rawSubdomain === 'www' ? 'default' : rawSubdomain;
+  const formattedSubdomain = rawSubdomain.replace(/-/g, ' ').toLowerCase();
+
+  (function setGalleryTitle() {
+    const pathPart = window.location.pathname.replace(/^\/+|\/+$/g, '').split('/')[0];
+    const subdomain = formattedSubdomain;
+    const finalTitle = pathPart ? `${pathPart} ${subdomain} - photo gallery` : `${subdomain} - photo gallery`;
+    document.getElementById("dynamicGalleryTitle").textContent = finalTitle;
+  })();
+
+  function fetchPostsFromBlogger() {
+    const encodedLabel = encodeURIComponent(feedLabel.trim());
+    const labelPath = encodedLabel ? `/-/${encodedLabel}` : "";
+    const url = `https://www.blogger.com/feeds/${blogId}/posts/default${labelPath}?alt=json-in-script&start-index=${startIndex}&max-results=${maxResults}&callback=showIngganinggraPosts`;
+
+    const s = document.createElement("script");
+    s.src = url;
+    document.body.appendChild(s);
+  }
+
+  function useCacheIfAvailable() {
+    const cache = localStorage.getItem(cacheKey);
+    if (cache) {
+      const data = JSON.parse(cache);
+      renderAllImages(data);
+    } else {
+      fetchPostsFromBlogger();
+    }
+  }
+
+  window.showIngganinggraPosts = function(data) {
+    localStorage.setItem(cacheKey, JSON.stringify(data));
+    renderAllImages(data);
+  };
+
+  function getLoopedText(arr, index, fallback = "") {
+    return arr.length > 0 ? arr[index % arr.length] : fallback;
+  }
+
+  function renderAllImages(data) {
+    if (!data.feed.entry) return;
+    const entries = data.feed.entry;
+
+    entries.forEach((entry, index) => {
+      const content = entry.content?.$t || "";
+      const imgMatch = content.match(/<img[^>]+src="([^"]+)"/);
+      if (!imgMatch) return;
+
+      const imageUrl = imgMatch[1].replace(/\/s\d{2,4}(-c)?\//, "/s1600/");
+      const altText = getLoopedText(altTexts, imageCounter, `${formattedSubdomain} - Photo ${imageCounter + 1}`);
+      const figCaption = getLoopedText(figCaptions, imageCounter, altText);
+      const h3Title = getLoopedText(h3Titles, imageCounter);
+      const pText = getLoopedText(pTexts, imageCounter);
+
+      const wrapper = document.createElement('div');
+      wrapper.className = "gallery-wrapper";
+
+      if (h3Title) {
+        const h3 = document.createElement("h3");
+        h3.textContent = h3Title;
+        wrapper.appendChild(h3);
+      }
+
+      const fig = document.createElement('figure');
+      fig.className = "gallery-item";
+      fig.setAttribute("itemscope", "");
+      fig.setAttribute("itemtype", "https://schema.org/ImageObject");
+
+      const img = document.createElement("img");
+      img.dataset.src = imageUrl;
+      img.alt = altText;
+      img.loading = "lazy";
+      img.setAttribute("itemprop", "thumbnail");
+      img.classList.add("lazy-image");
+
+      const caption = document.createElement("figcaption");
+      caption.setAttribute("itemprop", "caption");
+      caption.textContent = figCaption;
+
+      fig.appendChild(img);
+      fig.appendChild(caption);
+
+      if (pText) {
+        const p = document.createElement("p");
+        p.textContent = pText;
+        fig.appendChild(p);
+      }
+
+      wrapper.appendChild(fig);
+      container.appendChild(wrapper);
+
+      if (imageCounter < 3) {
+        const preload = document.createElement("link");
+        preload.rel = "preload";
+        preload.as = "image";
+        preload.href = imageUrl;
+        document.head.appendChild(preload);
+      }
+
+      imageCounter++;
+    });
+
+    setupLazyLoading();
+  }
+
+  function setupLazyLoading() {
+    if (!("IntersectionObserver" in window)) return;
+
+    const images = document.querySelectorAll(".lazy-image");
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.classList.remove("lazy-image");
+          obs.unobserve(img);
+        }
+      });
+    }, {
+      rootMargin: "0px 0px 100px 0px",
+      threshold: 0.1
+    });
+
+    images.forEach(img => observer.observe(img));
+  }
+
+  useCacheIfAvailable();
+})();
+</script>
+
+
+
+<header>
+  <a href="/" class="nav-brand" id="siteTitle">MyBlog</a>
+  <script>
+    const siteTitle = document.getElementById('siteTitle');
+    const host = window.location.hostname;
+    const parts = host.split('.');
+    let blogName = '';
+
+    if (parts.length >= 3) {
+      blogName = parts[parts.length - 3];
+    } else if (parts.length === 2) {
+      blogName = parts[0];
+    } else {
+      blogName = host;
+    }
+
+    blogName = blogName.charAt(0).toUpperCase() + blogName.slice(1);
+    siteTitle.textContent = blogName;
+  </script>
+  <div class="nav-actions">
+    <button class="nav-button" id="menuToggle" title="Menu" aria-label="Menu">
+      <!-- Hamburger Icon -->
+      <svg id="iconMenu" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M3 6h18M3 12h18M3 18h18"/>
+      </svg>
+      <!-- Close Icon -->
+      <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="display: none;">
+        <path d="M6 6l12 12M6 18l12-12"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<div id="menuPanel">
+  <ul>
+    <li><a href="/contact.html">Contact</a></li>
+    <li><a href="/privacy-policy.html">Privacy Policy</a></li>
+    <li><a href="/terms-and-conditions.html">Terms & Conditions</a></li>
+  </ul>
+</div>
+
+<script>
+  const toggleBtn = document.getElementById('menuToggle');
+  const menuPanel = document.getElementById('menuPanel');
+  const iconMenu = document.getElementById('iconMenu');
+  const iconClose = document.getElementById('iconClose');
+
+  toggleBtn.addEventListener('click', () => {
+    const isVisible = menuPanel.style.display === 'block';
+    menuPanel.style.display = isVisible ? 'none' : 'block';
+    iconMenu.style.display = isVisible ? 'inline' : 'none';
+    iconClose.style.display = isVisible ? 'none' : 'inline';
+  });
+</script> <footer style="text-align: center; padding: 30px 20px; font-size: 14px; color: #666;">  
+
+
+<hr /><br />
+
+    
+  
+  <div>&copy; <span id="current-year"></span> <span id="main-heading2"></span> All rights reserved.</div>  
+  <script>  
+    (function() {  
+      const domain = window.location.hostname;  
+      const parts = domain.split(".");  
+      const subdomain = parts.length > 2 ? parts[0] : "blog";  
+      const titleCase = subdomain.charAt(0).toUpperCase() + subdomain.slice(1);  
+
+      document.getElementById("current-year").textContent = new Date().getFullYear();  
+      document.getElementById("main-heading2").textContent = titleCase;  
+    })();  
+  </script>  
+</footer>  
+
+
+</body>  
+</html>
