@@ -24,3 +24,4 @@ jobs:
           git add categories
           git commit -m "Auto generate categories" || echo "No changes"
           git push
+
