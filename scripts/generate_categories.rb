@@ -55,3 +55,4 @@ categories.each do |slug, posts|
     f.puts "</body></html>"
   end
 end
+
