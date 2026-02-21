@@ -1,2 +1,60 @@
-<!DOCTYPE html><html lang='en' loading='azy'><head loading='lazy'><meta charset='UTF-8' /><title>#{slug}</title>
-  {% include head-categories.html %}</head><body loading='lazy'>{% include header1.html %}<main loading='lazy'>{% include main-categories.html %}</main>{% include awal-search.html %}<br /><br /><div loading='lazy'>{% include /ads/gobloggugel/sosmed.html %}</div>{% include footer-categories.html %}</body></html>"
+<!DOCTYPE html><html lang='en' loading='azy'><head loading='lazy'><meta charset='UTF-8' />
+  <!-- awal Seo Otomatis khusus untuk Homepage -->
+<script>
+(function () {
+  const hostname = location.hostname;
+  const pathname = location.pathname;
+
+  let subdomainRaw = hostname.split('.')[0];
+  if (subdomainRaw.toLowerCase() === 'www') subdomainRaw = hostname.split('.')[1] || '';
+
+  const formatText = str => str
+    .replace(/[-_]/g, ' ')
+    .replace(/\+/g, ' ')         // tambahan: ganti + jadi spasi
+    .replace(/\b\w/g, c => c.toUpperCase());
+
+  const subdomain = formatText(subdomainRaw.trim());
+  const cleanPath = pathname.replace(/^\/+|\/+$/g, '');
+  const isHome = !cleanPath || /^index\.(html?|php)$/i.test(cleanPath);
+
+  let rawPageName = cleanPath.split('/').pop() || '';
+  rawPageName = rawPageName.replace(/\.[^.]+$/, '').trim(); // hilangkan ekstensi
+  rawPageName = decodeURIComponent(rawPageName);
+
+  let titleText = isHome
+    ? subdomain
+    : `${formatText(rawPageName)} - ${subdomain}`;
+
+  // Title
+  let titleTag = document.querySelector('title') || document.createElement('title');
+  titleTag.textContent = titleText;
+  if (!titleTag.parentNode) document.head.appendChild(titleTag);
+
+  // Meta author
+  let metaAuthor = document.querySelector('meta[name="author"]') || document.createElement('meta');
+  metaAuthor.name = 'author';
+  metaAuthor.content = `${subdomain}`;
+  if (!metaAuthor.parentNode) document.head.appendChild(metaAuthor);
+
+  // Schema.org WebSite tanpa potentialAction (hilangkan sitelink search)
+  const schemaData = {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": subdomain,
+    "url": location.origin
+  };
+  let schemaScript = document.createElement('script');
+  schemaScript.type = 'application/ld+json';
+  schemaScript.textContent = JSON.stringify(schemaData);
+  document.head.appendChild(schemaScript);
+
+  // Canonical otomatis sesuai halaman saat ini
+  let canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
+  canonical.setAttribute('rel', 'canonical');
+  canonical.setAttribute('href', location.href);
+  if (!canonical.parentNode) document.head.appendChild(canonical);
+
+})();
+</script>
+<!-- akhir Seo Otomatis khusus untuk homepage -->
+  {% include head-categories.html %}</head><body loading='lazy'>{% include header1.html %}<main loading='lazy'>{% include main-categories.html %}</main>{% include awal-search.html %}<br /><br /><div loading='lazy'>{% include /ads/gobloggugel/sosmed.html %}</div>{% include footer-categories.html %}</body></html>
