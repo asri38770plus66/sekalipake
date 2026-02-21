@@ -12,20 +12,27 @@ posts.each do |file|
   parts = content.split("---")
   next if parts.length < 3
 
-  data = YAML.safe_load(parts[1])
-  next unless data && data["categories"]
+  data = YAML.safe_load(parts[1]) rescue nil
+  next unless data && data["categories"] && data["title"]
+
+  # Ambil permalink kalau ada
+  if data["permalink"]
+    post_url = data["permalink"]
+  else
+    # fallback: ambil nama file tanpa tanggal
+    filename = File.basename(file)
+    name = filename.sub(/\.(md|markdown|html)/, "")
+    name = name.gsub(/^\d{4}-\d{2}-\d{2}-/, "")
+    post_url = "/" + name + "/"
+  end
 
   Array(data["categories"]).each do |cat|
-    slug = cat.downcase.strip.gsub(" ", "-")
+    slug = cat.to_s.downcase.strip.gsub(" ", "-")
 
     categories[slug] ||= []
     categories[slug] << {
       "title" => data["title"],
-      "url" => "/" + File.basename(file)
-        .sub(".md", "")
-        .sub(".markdown", "")
-        .sub(".html", "")
-        .split("-", 4)[3]
+      "url" => post_url
     }
   end
 end
@@ -55,4 +62,3 @@ categories.each do |slug, posts|
     f.puts "</body></html>"
   end
 end
-
