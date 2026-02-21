@@ -1,32 +1,36 @@
 require "yaml"
 require "fileutils"
 
-posts = Dir["_posts/*"]
+posts = Dir.glob("_posts/**/*.{md,markdown,html}")
 
 categories = {}
 
 posts.each do |file|
-  content = File.read(file)
-  frontmatter = content.split("---")[1]
-  data = YAML.safe_load(frontmatter)
+  next unless File.file?(file)
 
-  next unless data["categories"]
+  content = File.read(file)
+  parts = content.split("---")
+  next if parts.length < 3
+
+  data = YAML.safe_load(parts[1])
+  next unless data && data["categories"]
 
   Array(data["categories"]).each do |cat|
     slug = cat.downcase.strip.gsub(" ", "-")
+
     categories[slug] ||= []
     categories[slug] << {
       "title" => data["title"],
-      "url" => "/" + file
-        .sub("_posts/", "")
+      "url" => "/" + File.basename(file)
         .sub(".md", "")
         .sub(".markdown", "")
+        .sub(".html", "")
         .split("-", 4)[3]
     }
   end
 end
 
-# hapus folder lama biar tidak numpuk
+# hapus folder lama
 FileUtils.rm_rf("categories")
 FileUtils.mkdir_p("categories")
 
