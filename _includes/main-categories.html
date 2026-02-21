@@ -1,5 +1,38 @@
-    f.puts "<ul>"
-    posts.each do |post|
-      f.puts "<li><a href='#{post["url"]}'>#{post["title"]}</a></li>"
-    end
-    f.puts "</ul>"
+<style>
+.category-cloud {
+  margin: 40px 0;
+}
+
+.category-cloud .tag {
+  display: inline-block;
+  margin: 6px;
+  padding: 6px 12px;
+  background: #f2f2f2;
+  border-radius: 20px;
+  text-decoration: none;
+  color: #333;
+  transition: 0.2s;
+}
+
+.category-cloud .tag:hover {
+  background: #000;
+  color: #fff;
+}
+</style>
+
+<ul class="category-cloud">
+
+  {% assign sorted_categories = site.categories | sort %}
+
+  {% for category in sorted_categories %}
+    {% assign name = category[0] %}
+    {% assign posts = category[1] %}
+    {% assign count = posts | size %}
+<li>
+    <a href="/categories/{{ name | slugify }}/"
+       class="tag"
+       style="font-size: {{ count | times: 2 | plus: 14 }}px">
+      {{ name }}
+    </a><p>{ name }}</p></li>
+  {% endfor %}
+</ul>
