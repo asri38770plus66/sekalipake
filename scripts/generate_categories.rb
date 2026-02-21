@@ -49,7 +49,7 @@ categories.each do |slug, posts|
     f.puts "---"
     f.puts "layout: null"
     f.puts "---"
-    f.puts "<!DOCTYPE html><html lang="en" loading="lazy"><head loading="lazy"><meta charset="UTF-8" />""
+    f.puts "<!DOCTYPE html><html lang="en" loading="lazy"><head loading="lazy"><meta charset="UTF-8" />"
     f.puts "<title>#{slug}</title>"
     f.puts "{%  head-categories.html %}</head><body loading="lazy">{% include header1.html %}<main loading="lazy">{% include main-categories.html %}</main>{% include awal-search.html %}<br /><br /><div loading="lazy">{% include /ads/gobloggugel/sosmed.html %}</div>{% include footer-categories.html %}</body></html>"
   end
