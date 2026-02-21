@@ -1,0 +1,34 @@
+<footer style="text-align: center; padding: 30px 20px; font-size: 16px; color: #666;" loading="lazy">
+  <small>
+    &copy; </small>
+<span id="current-year"></span> 
+ -  <a id="main-heading2" href="/" style="color: inherit; text-decoration: none;"></a>.
+  <span>   All rights reserved.</span> 
+  <script>
+    (function () {
+      const domain = window.location.hostname || "";
+      const parts = domain.split(".");
+      let brand = "";
+      let rootDomain = domain;
+      // Khusus untuk .my.id
+      if (domain.endsWith(".my.id") && parts.length > 2) {
+        // Ambil nama domain utama (2 bagian sebelum .my.id)
+        const baseName = parts[parts.length - 3]; // contoh: domain / do-main
+        rootDomain = "www." + baseName + ".my.id";
+
+        // Ubah jadi Title Case dengan spasi jika ada tanda minus
+        brand = baseName
+          .split("-")
+          .map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
+          .join(" ");
+      }
+
+      // Update elemen
+      document.getElementById("current-year").textContent = new Date().getFullYear();
+      const headingEl = document.getElementById("main-heading2");
+      headingEl.textContent = brand;
+      headingEl.href = "https://" + rootDomain;
+    })();
+  </script>
+</footer>
+<br /><br /><br />
