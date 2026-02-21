@@ -1,0 +1,36 @@
+name: Generate Categories
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - 'categories/**'
+
+concurrency:
+  group: generate-categories
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.1'
+
+      - name: Run generator
+        run: ruby scripts/generate_categories.rb
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add categories
+          git diff --cached --quiet || git commit -m "Auto generate categories"
+          git push
