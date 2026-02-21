@@ -1,0 +1,18 @@
+---
+layout: null
+permalink: /sitemap-categories.xml
+---
+
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+{% assign sorted_categories = site.categories | sort %}
+
+{% for category in sorted_categories %}
+  {% assign name = category[0] %}
+  <url>
+    <loc>{{ site.url }}/categories/{{ name | slugify }}/</loc>
+  </url>
+{% endfor %}
+
+</urlset>
