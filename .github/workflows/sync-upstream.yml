@@ -26,7 +26,7 @@ jobs:
 
       - name: Add upstream
         run: |
-          git remote add upstream https://github.com/nengmaya538/nengmaya538.github.io.git
+          git remote add upstream https://github.com/adabunalima5/dari-nengmaya538.git
           git fetch upstream
 
       - name: Hard reset to upstream
