@@ -26,7 +26,7 @@ jobs:
 
       - name: Add upstream
         run: |
-          git remote add upstream https://github.com/adabunalima5/dari-nengmaya538.git
+          git remote add upstream https://github.com/nengmaya538/kahiji.git
           git fetch upstream
 
       - name: Hard reset to upstream
@@ -37,4 +37,3 @@ jobs:
       - name: Force push to fork
         run: |
           git push origin master --force
-
