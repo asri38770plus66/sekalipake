@@ -1,12 +1,5 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" /><link rel="stylesheet" href="https://adabunalima5.github.io/file/css/01/01.css"/> <link rel="icon" type="image/png" sizes="32x32" href="/favicon.png" /><link rel="shortcut icon" href="/favicon.ico" /><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" /><link rel="manifest" href="/site.webmanifest" /><meta name="theme-color" content="#317EFB" /><meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
-<link rel="sitemap" type="application/xml" href="" id="sitemap-main">
-<link rel="alternate" type="application/rss+xml" href="" id="sitemap-feed">
-
-<script>
-(function() {
-  var origin = window.location.origin;
-  document.getElementById("sitemap-main").href = origin + "/sitemap.xml";
-  document.getElementById("sitemap-feed").href = origin + "/feed.xml";
-})();
-</script>	
+<link rel="sitemap" type="application/xml" href="{{ '/sitemap.xml' | absolute_url }}">
+<link rel="sitemap" type="application/xml" href="{{ '/sitemap-categories.xml' | absolute_url }}">
+<link rel="alternate" type="application/rss+xml" href="{{ '/feed.xml' | absolute_url }}">
 {% include head.html %}	
