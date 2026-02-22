@@ -86,17 +86,9 @@ layout: null
 
 
 
-<link rel="sitemap" type="application/xml" href="" id="sitemap-main">
-<link rel="alternate" type="application/rss+xml" href="" id="sitemap-feed">
-
-<script>
-(function() {
-  var origin = window.location.origin;
-  document.getElementById("sitemap-main").href = origin + "/sitemap.xml";
-  document.getElementById("sitemap-feed").href = origin + "/feed.xml";
-})();
-</script>	
-
+<link rel="sitemap" type="application/xml" href="{{ '/sitemap.xml' | absolute_url }}">
+<link rel="sitemap" type="application/xml" href="{{ '/sitemap-categories.xml' | absolute_url }}">
+<link rel="alternate" type="application/rss+xml" href="{{ '/feed.xml' | absolute_url }}">
 
 	{% include verif.html %}
   </head>
