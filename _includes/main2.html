@@ -47,7 +47,7 @@
   gap: 0.3rem;
 }
 .post-date::before {
-  content: "📅";
+  content: "";
   font-size: 0.7rem;
 }
 
@@ -236,18 +236,44 @@
 }
 </style>
 
+
+
 <section class="recent-posts" loading="lazy">      
-  
+ <center> <b>Recent Posts</b></center><br />
   <div id="recent-posts-container" class="grid">
-    <div class="loading">Loading posts</div>
+    <div class="loading">Loading posts...</div>
   </div>      
   <div id="pagination" class="pagination"></div>      
 </section>      
 
 <script>
 // ========== KONFIGURASI ==========
-const POSTS_SOURCE = 'https://fazri.my.id/posts2.json';
-const POSTS_PER_PAGE = 12;
+const POSTS_PER_PAGE = 6;
+
+// DAFTAR SOURCE YANG TERSEDIA
+const SOURCE_LIST = [
+  'https://rfazriansyah376.github.io'
+];
+
+// PILIH SOURCE SECARA ACAK
+const SELECTED_SOURCE = SOURCE_LIST[Math.floor(Math.random() * SOURCE_LIST.length)];
+const POSTS_SOURCE = `${SELECTED_SOURCE}/posts2.json`;
+const BASE_URL = SELECTED_SOURCE;
+
+// KONFIGURASI FILTER CATEGORY
+const TARGET_CATEGORY = '';
+
+// PRELOAD KONEKSI KE SEMUA SOURCE (OPTIMASI KECEPATAN)
+function addPreconnect() {
+  SOURCE_LIST.forEach(source => {
+    const link = document.createElement('link');
+    link.rel = 'preconnect';
+    link.href = source;
+    document.head.appendChild(link);
+  });
+}
+addPreconnect();
+
 let currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
 let filteredPosts = [];
 let allPosts = [];
@@ -267,20 +293,14 @@ function getCategoryCandidates(hostname) {
   };
 }
 
-// FUNGSI RANDOM SEMUA POSTINGAN (TANPA BATAS)
 function shuffleAllPosts(posts) {
   if (!Array.isArray(posts) || posts.length === 0) return [];
-  
-  // Clone array untuk di-shuffle
   const shuffled = [...posts];
-  
-  // Fisher-Yates shuffle algorithm
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
   }
-  
-  return shuffled; // Return SEMUA postingan yang sudah diacak
+  return shuffled;
 }
 
 function formatDate(dateString) {
@@ -288,25 +308,52 @@ function formatDate(dateString) {
   try {
     const date = new Date(dateString);
     if (isNaN(date.getTime())) return '';
-    
     const day = date.getDate();
-    const month = date.toLocaleDateString('id-ID', { 
-      month: 'short' 
-    }).replace('.', '');
+    const month = date.toLocaleDateString('id-ID', { month: 'short' }).replace('.', '');
     const year = date.getFullYear();
-    
     return `${day} ${month} ${year}`;
   } catch (e) {
     return '';
   }
 }
 
-// ========== RENDER POST CARD (DENGAN SAFETY CHECK) ==========
+// ========== STRUCTURED DATA UNTUK GOOGLE ==========
+function generateStructuredData(posts) {
+  // Ambil 10 postingan terbaru untuk structured data
+  const recentPosts = posts.slice(0, 10).map(post => ({
+    "@type": "BlogPosting",
+    "headline": post.title || 'Untitled',
+    "url": post.url ? (post.url.startsWith('/') ? `${BASE_URL}${post.url}` : `${BASE_URL}/${post.url}`) : BASE_URL,
+    "datePublished": post.date || new Date().toISOString().split('T')[0],
+    "description": post.excerpt || post.title || '',
+    "keywords": [...(post.tags || []), ...(post.labels || [])].join(', '),
+    "articleSection": post.categories ? post.categories.join(', ') : ''
+  }));
+
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": `Blog Network - ${SELECTED_SOURCE.replace('https://', '')}`,
+    "url": BASE_URL,
+    "blogPost": recentPosts
+  };
+  
+  // Hapus script lama jika ada
+  const oldScript = document.querySelector('script[type="application/ld+json"]');
+  if (oldScript) oldScript.remove();
+  
+  const script = document.createElement('script');
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify(structuredData);
+  document.head.appendChild(script);
+}
+
+// ========== RENDER POST CARD ==========
 function renderPostCard(post) {
   const article = document.createElement('article');
   article.className = 'post-card';
   
-  // 1. TANGGAL (jika ada di data)
+  // TANGGAL
   if (post.date) {
     const formattedDate = formatDate(post.date);
     if (formattedDate) {
@@ -317,36 +364,36 @@ function renderPostCard(post) {
     }
   }
   
-  // 2. CATEGORIES (selalu tampilkan jika ada)
-  if (post.categories && Array.isArray(post.categories) && post.categories.length > 0) {
+  // CATEGORIES
+  if (post.categories?.length) {
     const categoriesDiv = document.createElement('div');
-    categoriesDiv.className = 'post-categories';
+    categoriesDiv.className = 'post-categories spoo';
     
     post.categories.forEach(category => {
-      if (category && typeof category === 'string') {
+      if (category) {
         const link = document.createElement('a');
-        link.href = `/categories?q=${encodeURIComponent(category)}`;
+        link.href = `${BASE_URL}/categories?q=${encodeURIComponent(category)}`;
         link.className = 'category-link';
         link.textContent = category;
-        link.title = `Lihat postingan di kategori: ${category}`;
         categoriesDiv.appendChild(link);
       }
     });
     
-    if (categoriesDiv.children.length > 0) {
-      article.appendChild(categoriesDiv);
-    }
+    if (categoriesDiv.children.length) article.appendChild(categoriesDiv);
   }
   
-  // 3. JUDUL
+  // JUDUL
   const h3 = document.createElement('h3');
   const titleLink = document.createElement('a');
-  titleLink.href = post.url || '#';
+  const postUrl = post.url 
+    ? (post.url.startsWith('/') ? `${BASE_URL}${post.url}` : `${BASE_URL}/${post.url}`)
+    : BASE_URL;
+  titleLink.href = postUrl;
   titleLink.textContent = post.title || '(no title)';
   h3.appendChild(titleLink);
   article.appendChild(h3);
   
-  // 4. EXCERPT
+  // EXCERPT
   if (post.excerpt) {
     const excerpt = document.createElement('p');
     excerpt.className = 'post-excerpt';
@@ -354,60 +401,49 @@ function renderPostCard(post) {
     article.appendChild(excerpt);
   }
   
-  // 5. FOOTER (Tags & Labels) - HANYA JIKA ADA DATA
-  const hasTags = post.tags && Array.isArray(post.tags) && post.tags.length > 0;
-  const hasLabels = post.labels && Array.isArray(post.labels) && post.labels.length > 0;
+  // FOOTER (Tags & Labels)
+  const hasTags = post.tags?.length;
+  const hasLabels = post.labels?.length;
   
   if (hasTags || hasLabels) {
     const footer = document.createElement('div');
     footer.className = 'post-footer';
     
-    // Tags (jika ada)
     if (hasTags) {
       const tagsDiv = document.createElement('div');
-      tagsDiv.className = 'post-tags';
+      tagsDiv.className = 'post-tags spoo';
       
       post.tags.forEach(tag => {
-        if (tag && typeof tag === 'string') {
+        if (tag) {
           const link = document.createElement('a');
-          link.href = `/tags?q=${encodeURIComponent(tag)}`;
+          link.href = `${BASE_URL}/tags?q=${encodeURIComponent(tag)}`;
           link.className = 'tag-link';
           link.textContent = `#${tag}`;
-          link.title = `Filter by tag: ${tag}`;
           tagsDiv.appendChild(link);
         }
       });
       
-      if (tagsDiv.children.length > 0) {
-        footer.appendChild(tagsDiv);
-      }
+      if (tagsDiv.children.length) footer.appendChild(tagsDiv);
     }
     
-    // Labels (jika ada)
     if (hasLabels) {
       const labelsDiv = document.createElement('div');
-      labelsDiv.className = 'post-labels';
+      labelsDiv.className = 'post-labels spoo';
       
       post.labels.forEach(label => {
-        if (label && typeof label === 'string') {
+        if (label) {
           const link = document.createElement('a');
-          link.href = `/labels?q=${encodeURIComponent(label)}`;
+          link.href = `${BASE_URL}/labels?q=${encodeURIComponent(label)}`;
           link.className = 'label-link';
           link.textContent = label;
-          link.title = `Filter by label: ${label}`;
           labelsDiv.appendChild(link);
         }
       });
       
-      if (labelsDiv.children.length > 0) {
-        footer.appendChild(labelsDiv);
-      }
+      if (labelsDiv.children.length) footer.appendChild(labelsDiv);
     }
     
-    // Hanya tambah footer jika ada children
-    if (footer.children.length > 0) {
-      article.appendChild(footer);
-    }
+    if (footer.children.length) article.appendChild(footer);
   }
   
   return article;
@@ -416,79 +452,61 @@ function renderPostCard(post) {
 // ========== LOAD & PROCESS POSTS ==========
 async function loadAndProcessPosts() {
   try {
-    console.log('Loading posts from:', POSTS_SOURCE);
     const response = await fetch(POSTS_SOURCE);
     
     if (!response.ok) {
-      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      throw new Error(`HTTP ${response.status}`);
     }
     
     allPosts = await response.json();
-    console.log(`Loaded ${allPosts.length} posts`);
     
-    // Debug: Lihat struktur data pertama
-    if (allPosts.length > 0) {
-      console.log('Sample post structure:', {
-        title: allPosts[0].title,
-        hasDate: !!allPosts[0].date,
-        hasTags: !!(allPosts[0].tags && allPosts[0].tags.length),
-        hasLabels: !!(allPosts[0].labels && allPosts[0].labels.length),
-        fullData: allPosts[0]
-      });
-    }
+    // Generate structured data untuk Google secepatnya
+    generateStructuredData(allPosts);
     
-    // Filter berdasarkan kategori
-    const { sub: subCategory, domain: domainCategory } = getCategoryCandidates(window.location.hostname);
+    // FILTER
     const normalize = s => String(s || '').replace(/[-.]+/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
     
-    console.log('Category detection:', { subCategory, domainCategory });
-    
-    if (subCategory) {
+    if (TARGET_CATEGORY?.trim()) {
+      const targetNormalized = normalize(TARGET_CATEGORY);
       filteredPosts = allPosts.filter(p => 
-        p.categories && 
-        Array.isArray(p.categories) && 
-        p.categories.some(c => c && normalize(c) === subCategory)
+        p.categories?.some(c => c && normalize(c) === targetNormalized)
       );
-      console.log(`Found ${filteredPosts.length} posts for subcategory: ${subCategory}`);
     }
     
-    if (filteredPosts.length === 0 && domainCategory) {
-      filteredPosts = allPosts.filter(p => 
-        p.categories && 
-        Array.isArray(p.categories) && 
-        p.categories.some(c => c && normalize(c) === domainCategory)
-      );
-      console.log(`Found ${filteredPosts.length} posts for domain category: ${domainCategory}`);
-    }
-    
-    // FALLBACK: SEMUA POSTINGAN DIACAK (TANPA BATAS)
-    if (filteredPosts.length === 0) {
-      console.log('No category match, showing ALL posts in random order');
-      filteredPosts = shuffleAllPosts(allPosts); // Acak SEMUA postingan
-    }
-    
-    // Urutkan berdasarkan date (jika ada) atau tetap acak
-    // Note: Karena sudah di-shuffle, kita tidak perlu sort lagi
-    // Jika ingin tetap ada urutan tanggal untuk matched posts:
-    if (filteredPosts.length > 0 && filteredPosts[0].date) {
-      // Cek apakah ini matched posts (bukan random fallback)
-      const isMatched = subCategory || domainCategory;
-      if (isMatched) {
-        // Untuk matched posts, urutkan berdasarkan tanggal
-        filteredPosts.sort((a, b) => {
-          const dateA = a.date ? new Date(a.date).getTime() : 0;
-          const dateB = b.date ? new Date(b.date).getTime() : 0;
-          return dateB - dateA; // Terbaru ke terlama
-        });
-        console.log('Matched posts sorted by date');
+    if (!filteredPosts.length) {
+      const { sub: subCategory, domain: domainCategory } = getCategoryCandidates(window.location.hostname);
+      
+      if (subCategory) {
+        filteredPosts = allPosts.filter(p => 
+          p.categories?.some(c => c && normalize(c) === subCategory)
+        );
       }
+      
+      if (!filteredPosts.length && domainCategory) {
+        filteredPosts = allPosts.filter(p => 
+          p.categories?.some(c => c && normalize(c) === domainCategory)
+        );
+      }
+    }
+    
+    if (!filteredPosts.length) {
+      filteredPosts = shuffleAllPosts(allPosts);
+    }
+    
+    // Sort by date untuk matched posts
+    if (filteredPosts.length && filteredPosts[0].date && 
+        (TARGET_CATEGORY || filteredPosts.length !== allPosts.length)) {
+      filteredPosts.sort((a, b) => {
+        const dateA = a.date ? new Date(a.date).getTime() : 0;
+        const dateB = b.date ? new Date(b.date).getTime() : 0;
+        return dateB - dateA;
+      });
     }
     
     renderPosts();
     
   } catch (error) {
-    console.error('Error loading posts:', error);
-    renderNoPosts(`Error: ${error.message}`);
+    renderNoPosts();
   }
 }
 
@@ -497,8 +515,8 @@ function renderPosts() {
   const container = document.getElementById('recent-posts-container');
   const pagination = document.getElementById('pagination');
   
-  if (filteredPosts.length === 0) {
-    renderNoPosts('No posts available');
+  if (!filteredPosts.length) {
+    renderNoPosts();
     return;
   }
   
@@ -509,12 +527,9 @@ function renderPosts() {
   const end = start + POSTS_PER_PAGE;
   const pagePosts = filteredPosts.slice(start, end);
   
-  console.log(`Rendering ${pagePosts.length} posts for page ${currentPage} (Total: ${filteredPosts.length})`);
-  
   // Render post cards
-  pagePosts.forEach((post, index) => {
-    const card = renderPostCard(post);
-    container.appendChild(card);
+  pagePosts.forEach(post => {
+    container.appendChild(renderPostCard(post));
   });
   
   // Pagination
@@ -567,8 +582,6 @@ function addPageButton(page) {
   if (page === currentPage) {
     pageBtn.disabled = true;
     pageBtn.style.fontWeight = 'bold';
-    pageBtn.style.background = '#005ec7';
-    pageBtn.style.cursor = 'default';
   }
   
   pageBtn.onclick = () => changePage(page);
@@ -578,7 +591,7 @@ function addPageButton(page) {
 function addEllipsis() {
   const pagination = document.getElementById('pagination');
   const span = document.createElement('span');
-  span.textContent = '…';
+  span.textContent = '. . .';
   span.style.padding = '0 0.3rem';
   pagination.appendChild(span);
 }
@@ -586,34 +599,21 @@ function addEllipsis() {
 function changePage(page) {
   currentPage = page;
   renderPosts();
-  
-  // Update URL tanpa reload
   const newUrl = `${window.location.pathname}?page=${String(page).padStart(2, '0')}`;
   history.pushState({}, '', newUrl);
-  
-  // Scroll ke atas dengan smooth
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ========== ERROR HANDLING ==========
-function renderNoPosts(message = 'No posts found') {
+function renderNoPosts() {
   const container = document.getElementById('recent-posts-container');
   const pagination = document.getElementById('pagination');
   
   container.innerHTML = `
-    <div style="text-align:center; padding:3rem; color:#666; grid-column:1/-1;">
-      <p style="margin-bottom:1rem;">${message}</p>
-      <button onclick="window.location.reload()" style="
-        background: var(--dynamic-color, #0078ff);
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 0.9rem;
-      ">
-        Refresh Page
-      </button>
+    <div class="no-posts" style="text-align:center; padding:2rem; grid-column:1/-1;">
+      <h3>Content Unavailable</h3>
+      <p>Please check back later.</p>
+      <a href="${BASE_URL}" style="color:#0078ff;">Return to Homepage</a>
     </div>
   `;
   
@@ -622,13 +622,15 @@ function renderNoPosts(message = 'No posts found') {
 
 // ========== INITIALIZE ==========
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('Initializing posts loader...');
   loadAndProcessPosts();
   
-  // Handle browser back/forward buttons
   window.addEventListener('popstate', () => {
     currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
     renderPosts();
   });
 });
 </script>
+<br /><hr /><br />
+<center><b>Featured Posts</b></center>
+{% include main-categories.html %}
+<br />
