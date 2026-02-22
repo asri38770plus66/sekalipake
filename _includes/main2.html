@@ -237,7 +237,7 @@
 </style>
 
 <section class="recent-posts" loading="lazy">      
-  <h2>Recent Posts</h2>
+  
   <div id="recent-posts-container" class="grid">
     <div class="loading">Loading posts</div>
   </div>      
@@ -246,7 +246,7 @@
 
 <script>
 // ========== KONFIGURASI ==========
-const POSTS_SOURCE = '/posts2.json';
+const POSTS_SOURCE = 'https://fazri.my.id/posts2.json';
 const POSTS_PER_PAGE = 12;
 let currentPage = parseInt(new URLSearchParams(window.location.search).get('page')) || 1;
 let filteredPosts = [];
