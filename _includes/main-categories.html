@@ -1,38 +1,81 @@
+
+<div class="card-body">
+    <h2 class="card-title">
+        <a class="post-link" href="{{ site.baseurl }}{{ post.url }}">
+            {{ post.title }}
+        </a>
+    </h2>
+<p class="card-excerpt">
+        {{ post.excerpt | strip_html | truncatewords:30 }}
+    </p>
+    <div class="post-categories">
+        {% for cat in post.categories %}
+            <a class="cat-badge"
+               href="{{ site.baseurl }}/categories/{{ cat | slugify }}/">
+                {{ cat }}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="card-footer">
+    <div class="wrapfooter">
+        <span class="post-read-more">
+            <a href="{{ site.baseurl }}{{ post.url }}" title="Read Story">
+                <svg width="20" height="20" viewbox="0 0 25 25">
+                    <path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6z" fill-rule="evenodd"></path>
+                </svg>
+            </a>
+        </span>
+        <div class="clearfix"></div>
+    </div>
+</div>
 <style>
-.category-cloud {
-  margin: 40px 0;
+.card-body {
+    padding: 14px;
 }
 
-.category-cloud .tag {
-  display: inline-block;
-  margin: 6px;
-  padding: 6px 12px;
-  background: #f2f2f2;
-  border-radius: 20px;
-  text-decoration: none;
-  color: #333;
-  transition: 0.2s;
+.post-link {
+    color: #111;
+    text-decoration: none;
 }
 
-.category-cloud .tag:hover {
-  background: #000;
-  color: #fff;
+.post-link:hover {
+    text-decoration: underline;
+}
+
+.post-categories {
+    margin: 6px 0 10px 0;
+}
+
+.cat-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 8px;
+    margin-right: 5px;
+    margin-bottom: 4px;
+    border-radius: 12px;
+    background: #f2f2f2;
+    color: #555;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.cat-badge:hover {
+    background: #111;
+    color: #fff;
+}
+
+.card-excerpt {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+    margin-bottom: 0;
+}
+
+.card-footer {
+    padding: 10px 14px;
+    background: #fff;
+    border-top: 1px solid #eee;
 }
 </style>
-
-<ul class="category-cloud">
-
-  {% assign sorted_categories = site.categories | sort %}
-
-  {% for category in sorted_categories %}
-    {% assign name = category[0] %}
-    {% assign posts = category[1] %}
-    {% assign count = posts | size %}
-<li>
-    <a href="/categories/{{ name | slugify }}/"
-       class="tag"
-       style="font-size: {{ count | times: 2 | plus: 14 }}px">
-      {{ name }}
-    </a><p>{{ name }}</p></li>
-  {% endfor %}
-</ul>
