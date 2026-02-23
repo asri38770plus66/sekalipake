@@ -2,10 +2,10 @@
 name: "Mediumish"
 title: "Mediumish"
 description: "Jekyll template, Medium styled, free for bloggers."
-baseurl: /
+baseurl: ""  # Kosongkan jika di root domain
 permalink: /:title/
 
-# Plugins STANDARD saja (tanpa custom)
+# Plugins
 plugins:
   - jekyll-paginate
   - jekyll-sitemap
@@ -21,9 +21,9 @@ jekyll-archives:
   permalinks:
     category: '/category/:name/'
     
-# Pagination 
-paginate: 99
-paginate_path: /page:num/
+# Pagination - PERBAIKI INI
+paginate: 6  # Ubah dari 99 ke 6
+paginate_path: "/page/:num/"  # Tambah tanda kutip dan slash di akhir
     
 # Markdown
 markdown: kramdown
@@ -33,4 +33,3 @@ kramdown:
 
 # Exclude
 exclude: [changelog.md, LICENSE.txt, README.md, Gemfile, Gemfile.lock]
-
