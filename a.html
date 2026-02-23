@@ -1,0 +1,266 @@
+---
+layout: null
+---
+
+{% if paginator %}
+    {% if paginator.posts.size > 0 %}
+        {% for post in paginator.posts %}
+        <div class="card">
+            <div class="card-body">
+                <h2>
+                    <a href="{{ post.url }}" class="post-link">{{ post.title }}</a>
+                </h2>
+
+                {% if post.categories and post.categories.size > 0 %}
+                <div class="post-meta-section">
+                    <span class="meta-label">Categories:</span>
+                    <div class="post-categories">
+                        {% for cat in post.categories %}
+                            <a href="/categories/?q={{ cat | slugify }}" class="cat-badge">
+                                {{ cat }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if post.labels and post.labels.size > 0 %}
+                <div class="post-meta-section">
+                    <span class="meta-label">Labels:</span>
+                    <div class="post-labels">
+                        {% for label in post.labels %}
+                            <a href="/labels/?q={{ label | slugify }}" class="label-badge">
+                                {{ label }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if post.tags and post.tags.size > 0 %}
+                <div class="post-meta-section">
+                    <span class="meta-label">Tags:</span>
+                    <div class="post-tags">
+                        {% for tag in post.tags %}
+                            <a href="/tags/?q={{ tag | slugify }}" class="tag-badge">
+                                {{ tag }}
+                            </a>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+
+                <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords:30 }}</p>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>Tidak ada postingan.</p>
+    {% endif %}
+{% else %}
+    <!-- Fallback ke site.posts jika paginator tidak tersedia -->
+    <p style="color: red;">Pagination tidak aktif. Menampilkan semua postingan sebagai fallback.</p>
+    
+    {% for post in site.posts limit:6 %}
+    <div class="card">
+        <div class="card-body">
+            <h2>
+                <a href="{{ post.url }}" class="post-link">{{ post.title }}</a>
+            </h2>
+
+            {% if post.categories and post.categories.size > 0 %}
+            <div class="post-meta-section">
+                <span class="meta-label">Categories:</span>
+                <div class="post-categories">
+                    {% for cat in post.categories %}
+                        <a href="/categories/?q={{ cat | slugify }}" class="cat-badge">
+                            {{ cat }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if post.labels and post.labels.size > 0 %}
+            <div class="post-meta-section">
+                <span class="meta-label">Labels:</span>
+                <div class="post-labels">
+                    {% for label in post.labels %}
+                        <a href="/labels/?q={{ label | slugify }}" class="label-badge">
+                            {{ label }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+            
+            {% if post.tags and post.tags.size > 0 %}
+            <div class="post-meta-section">
+                <span class="meta-label">Tags:</span>
+                <div class="post-tags">
+                    {% for tag in post.tags %}
+                        <a href="/tags/?q={{ tag | slugify }}" class="tag-badge">
+                            {{ tag }}
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <p class="card-excerpt">{{ post.excerpt | strip_html | truncatewords:30 }}</p>
+        </div>
+    </div>
+    {% endfor %}
+{% endif %}
+
+<style>
+/* CSS tetap sama */
+.card-body {
+    padding: 14px;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.post-link {
+    color: #111;
+    text-decoration: none;
+    font-size: 1.2rem;
+}
+
+.post-link:hover {
+    text-decoration: underline;
+}
+
+.post-meta-section {
+    margin: 8px 0;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.meta-label {
+    font-size: 11px;
+    font-weight: bold;
+    color: #666;
+    min-width: 70px;
+    margin-right: 10px;
+    margin-top: 3px;
+}
+
+.post-categories, .post-labels, .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    flex: 1;
+}
+
+.cat-badge, .label-badge, .tag-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 8px;
+    margin-right: 5px;
+    margin-bottom: 4px;
+    border-radius: 12px;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.cat-badge {
+    background: #e3f2fd;
+    color: #1976d2;
+}
+
+.cat-badge:hover {
+    background: #1976d2;
+    color: #fff;
+}
+
+.label-badge {
+    background: #f3e5f5;
+    color: #7b1fa2;
+}
+
+.label-badge:hover {
+    background: #7b1fa2;
+    color: #fff;
+}
+
+.tag-badge {
+    background: #e8f5e8;
+    color: #2e7d32;
+}
+
+.tag-badge:hover {
+    background: #2e7d32;
+    color: #fff;
+}
+
+.card-excerpt {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+    margin-top: 12px;
+    margin-bottom: 0;
+}
+
+.pagination {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.pagination a, .pagination span {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 3px;
+    border-radius: 4px;
+}
+
+.pagination a {
+    background: #f2f2f2;
+    color: #333;
+    text-decoration: none;
+}
+
+.pagination a:hover {
+    background: #111;
+    color: #fff;
+}
+
+.pagination span {
+    background: #111;
+    color: #fff;
+}
+
+.pagination .disabled {
+    background: #f2f2f2;
+    color: #999;
+}
+</style>
+
+<!-- Pagination - hanya tampil jika paginator ada -->
+{% if paginator %}
+    {% if paginator.total_pages > 1 %}
+    <div class="pagination">
+      {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">&laquo; Prev</a>
+      {% else %}
+        <span class="disabled">&laquo; Prev</span>
+      {% endif %}
+
+      {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+          <span class="current">{{ page }}</span>
+        {% elsif page == 1 %}
+          <a href="{{ '/' | prepend: site.baseurl }}">{{ page }}</a>
+        {% else %}
+          <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+        {% endif %}
+      {% endfor %}
+
+      {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next &raquo;</a>
+      {% else %}
+        <span class="disabled">Next &raquo;</span>
+      {% endif %}
+    </div>
+    {% endif %}
+{% endif %}
