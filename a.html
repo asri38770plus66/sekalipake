@@ -3,36 +3,152 @@ layout: default
 title: Home
 ---
 
-<div class="card-body">
-    <h2 class="card-title">
-        <a class="post-link" href="{{ site.baseurl }}{{ post.url }}">
-            {{ post.title }}
-        </a>
-    </h2>
+<style>
+.post-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
 
-    <div class="post-categories">
-        {% for cat in post.categories %}
-            <a class="cat-badge"
-               href="{{ site.baseurl }}/categories/{{ cat | slugify }}/">
-                {{ cat }}
-            </a>
-        {% endfor %}
+.post-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background: #fff;
+    transition: 0.2s ease;
+}
+
+.post-card:hover {
+    border-color: #ddd;
+}
+
+.card-body {
+    padding: 14px;
+}
+
+.post-link {
+    color: #111;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.post-link:hover {
+    text-decoration: underline;
+}
+
+.post-categories {
+    margin: 6px 0 10px 0;
+}
+
+.cat-badge {
+    display: inline-block;
+    font-size: 11px;
+    padding: 3px 8px;
+    margin-right: 5px;
+    margin-bottom: 4px;
+    border-radius: 12px;
+    background: #f2f2f2;
+    color: #555;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.cat-badge:hover {
+    background: #111;
+    color: #fff;
+}
+
+.card-excerpt {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+    margin: 0;
+}
+
+.pagination {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 4px;
+    font-size: 14px;
+    text-decoration: none;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    color: #333;
+}
+
+.pagination a:hover {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+
+.pagination .current {
+    background: #111;
+    color: #fff;
+    border-color: #111;
+}
+</style>
+
+
+<div class="post-grid">
+
+{% for post in paginator.posts %}
+    <div class="post-card">
+        <div class="card-body">
+
+            <h2>
+                <a class="post-link" href="{{ site.baseurl }}{{ post.url }}">
+                    {{ post.title }}
+                </a>
+            </h2>
+
+            <div class="post-categories">
+                {% for cat in post.categories %}
+                    <a class="cat-badge"
+                       href="{{ site.baseurl }}/categories/{{ cat | slugify }}/">
+                        {{ cat }}
+                    </a>
+                {% endfor %}
+            </div>
+
+            <p class="card-excerpt">
+                {{ post.excerpt | strip_html | truncatewords: 25 }}
+            </p>
+
+        </div>
     </div>
+{% endfor %}
 
-    <p class="card-excerpt">
-        {{ post.excerpt | strip_html | truncatewords:30 }}
-    </p>
 </div>
 
-<div class="card-footer">
-    <div class="wrapfooter">
-        <span class="post-read-more">
-            <a href="{{ site.baseurl }}{{ post.url }}" title="Read Story">
-                <svg width="20" height="20" viewbox="0 0 25 25">
-                    <path d="M19 6c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v14.66h.012c.01.103.045.204.12.285a.5.5 0 0 0 .706.03L12.5 16.85l5.662 4.126a.508.508 0 0 0 .708-.03.5.5 0 0 0 .118-.285H19V6z" fill-rule="evenodd"></path>
-                </svg>
-            </a>
-        </span>
-        <div class="clearfix"></div>
-    </div>
+
+<!-- PAGINATION -->
+{% if paginator.total_pages > 1 %}
+<div class="pagination">
+
+    {% if paginator.previous_page %}
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">« Prev</a>
+    {% endif %}
+
+    {% for page in (1..paginator.total_pages) %}
+        {% if page == paginator.page %}
+            <span class="current">{{ page }}</span>
+        {% elsif page == 1 %}
+            <a href="{{ site.baseurl }}/">{{ page }}</a>
+        {% else %}
+            <a href="{{ site.baseurl }}/page/{{ page }}/">{{ page }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if paginator.next_page %}
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl }}">Next »</a>
+    {% endif %}
+
 </div>
+{% endif %}
