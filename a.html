@@ -14,11 +14,6 @@ title: Home
     border: 1px solid #eee;
     border-radius: 8px;
     background: #fff;
-    transition: 0.2s ease;
-}
-
-.post-card:hover {
-    border-color: #ddd;
 }
 
 .card-body {
@@ -44,13 +39,11 @@ title: Home
     display: inline-block;
     font-size: 11px;
     padding: 3px 8px;
-    margin-right: 5px;
-    margin-bottom: 4px;
+    margin: 2px 4px 2px 0;
     border-radius: 12px;
     background: #f2f2f2;
     color: #555;
     text-decoration: none;
-    transition: 0.2s ease;
 }
 
 .cat-badge:hover {
@@ -66,39 +59,36 @@ title: Home
 }
 
 .pagination {
-    margin-top: 40px;
     text-align: center;
+    margin-top: 40px;
 }
 
-.pagination a,
-.pagination span {
+.pagination a {
     display: inline-block;
     padding: 6px 12px;
     margin: 4px;
-    font-size: 14px;
-    text-decoration: none;
-    border-radius: 6px;
     border: 1px solid #eee;
+    border-radius: 6px;
+    text-decoration: none;
     color: #333;
 }
 
 .pagination a:hover {
     background: #111;
     color: #fff;
-    border-color: #111;
-}
-
-.pagination .current {
-    background: #111;
-    color: #fff;
-    border-color: #111;
 }
 </style>
 
 
 <div class="post-grid">
 
-{% for post in paginator.posts %}
+{% assign posts = site.posts %}
+{% assign posts_per_page = 6 %}
+{% assign page_number = page.page | default: 1 %}
+{% assign start_index = posts_per_page | times: page_number | minus: posts_per_page %}
+
+{% for post in posts offset:start_index limit:posts_per_page %}
+
     <div class="post-card">
         <div class="card-body">
 
@@ -123,32 +113,7 @@ title: Home
 
         </div>
     </div>
+
 {% endfor %}
 
 </div>
-
-
-<!-- PAGINATION -->
-{% if paginator.total_pages > 1 %}
-<div class="pagination">
-
-    {% if paginator.previous_page %}
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl }}">« Prev</a>
-    {% endif %}
-
-    {% for page in (1..paginator.total_pages) %}
-        {% if page == paginator.page %}
-            <span class="current">{{ page }}</span>
-        {% elsif page == 1 %}
-            <a href="{{ site.baseurl }}/">{{ page }}</a>
-        {% else %}
-            <a href="{{ site.baseurl }}/page/{{ page }}/">{{ page }}</a>
-        {% endif %}
-    {% endfor %}
-
-    {% if paginator.next_page %}
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl }}">Next »</a>
-    {% endif %}
-
-</div>
-{% endif %}
