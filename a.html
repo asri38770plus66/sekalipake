@@ -68,16 +68,38 @@ title: Home
 <script>
 document.addEventListener("DOMContentLoaded", function() {
   const container = document.getElementById("postContainer");
-  const items = Array.from(container.children);
+  let items = Array.from(container.children);
 
-  // Fisher-Yates shuffle
-  for (let i = items.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [items[i], items[j]] = [items[j], items[i]];
+  // Ambil kategori utama dari setiap post
+  items = items.map(item => {
+    const firstCategory = item.querySelector(".meta a");
+    return {
+      element: item,
+      category: firstCategory ? firstCategory.textContent.trim() : ""
+    };
+  });
+
+  // Shuffle awal
+  items.sort(() => Math.random() - 0.5);
+
+  // Susun ulang supaya tidak ada kategori sama berurutan
+  const result = [];
+  while (items.length > 0 && result.length < 6) {
+
+    let foundIndex = items.findIndex(item => {
+      if (result.length === 0) return true;
+      return item.category !== result[result.length - 1].category;
+    });
+
+    if (foundIndex === -1) {
+      foundIndex = 0; // kalau semua sisa kategori sama, paksa ambil
+    }
+
+    result.push(items.splice(foundIndex, 1)[0]);
   }
 
-  // tampilkan hanya 6
+  // Render ulang
   container.innerHTML = "";
-  items.slice(0, 6).forEach(item => container.appendChild(item));
+  result.forEach(item => container.appendChild(item.element));
 });
 </script>
