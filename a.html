@@ -3,19 +3,58 @@ layout: default
 title: Home
 ---
 
-<!-- Menampilkan postingan dengan paginasi -->
+<!-- DEBUG INFORMATION - Akan membantu mengetahui masalah -->
+<div style="background: #e3f2fd; color: #0d47a1; padding: 15px; margin: 20px 0; border-radius: 5px; border: 1px solid #90caf9;">
+    <h3 style="margin-top: 0;">🔍 Debug Information</h3>
+    <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <td style="padding: 5px;"><strong>Total Posts:</strong></td>
+            <td style="padding: 5px;">{{ site.posts.size }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;"><strong>Paginator exists?</strong></td>
+            <td style="padding: 5px;">{% if paginator %}✅ Yes{% else %}❌ No{% endif %}</td>
+        </tr>
+        {% if paginator %}
+        <tr>
+            <td style="padding: 5px;"><strong>Paginator Posts:</strong></td>
+            <td style="padding: 5px;">{{ paginator.posts.size }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;"><strong>Total Pages:</strong></td>
+            <td style="padding: 5px;">{{ paginator.total_pages }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;"><strong>Current Page:</strong></td>
+            <td style="padding: 5px;">{{ paginator.page }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;"><strong>Per Page:</strong></td>
+            <td style="padding: 5px;">{{ paginator.per_page }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;"><strong>Previous Page Path:</strong></td>
+            <td style="padding: 5px;">{{ paginator.previous_page_path }}</td>
+        </tr>
+        <tr>
+            <td style="padding: 5px;"><strong>Next Page Path:</strong></td>
+            <td style="padding: 5px;">{{ paginator.next_page_path }}</td>
+        </tr>
+        {% endif %}
+    </table>
+</div>
+
+<!-- Menampilkan postingan -->
 {% if paginator %}
-    <!-- Menggunakan paginator jika tersedia -->
     {% assign posts = paginator.posts %}
-    {% assign using_paginator = true %}
+    <p style="color: green;">✅ Menggunakan paginator dengan {{ paginator.posts.size }} postingan</p>
 {% else %}
-    <!-- Fallback ke site.posts dengan batasan manual -->
     {% assign posts = site.posts %}
-    {% assign using_paginator = false %}
+    <p style="color: orange;">⚠️ Paginator tidak ditemukan, menggunakan site.posts</p>
 {% endif %}
 
 <!-- Loop postingan -->
-{% for post in posts limit: 6 %}
+{% for post in posts limit:6 %}
 <div class="card">
     <div class="card-body">
         <h2 class="post-title">
@@ -77,55 +116,86 @@ title: Home
 </div>
 {% endfor %}
 
-<!-- Paginasi -->
-{% if paginator.total_pages > 1 %}
-<div class="pagination">
-    <!-- Previous Page -->
-    {% if paginator.previous_page %}
-        <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-prev">&laquo; Sebelumnya</a>
-    {% else %}
-        <span class="pagination-prev disabled">&laquo; Sebelumnya</span>
-    {% endif %}
-
-    <!-- Page Numbers -->
-    <div class="pagination-pages">
-        {% for page in (1..paginator.total_pages) %}
-            {% if page == paginator.page %}
-                <span class="current">{{ page }}</span>
-            {% elsif page == 1 %}
-                <a href="{{ '/' | relative_url }}">{{ page }}</a>
-            {% else %}
-                <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+<!-- PAGINATION - Versi sederhana untuk testing -->
+{% if paginator %}
+    {% if paginator.total_pages > 1 %}
+    <div class="pagination" style="margin: 40px 0; padding: 20px; background: #f8f9fa; border-radius: 8px;">
+        <h3 style="margin-top: 0;">📑 Halaman {{ paginator.page }} dari {{ paginator.total_pages }}</h3>
+        
+        <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <!-- First Page -->
+            {% if paginator.page > 1 %}
+                <a href="{{ '/' | relative_url }}" class="pagination-btn" style="padding: 8px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">First</a>
             {% endif %}
-        {% endfor %}
+            
+            <!-- Previous Page -->
+            {% if paginator.previous_page %}
+                <a href="{{ paginator.previous_page_path | relative_url }}" class="pagination-btn" style="padding: 8px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">&laquo; Prev</a>
+            {% else %}
+                <span class="pagination-btn disabled" style="padding: 8px 12px; background: #6c757d; color: white; border-radius: 4px; opacity: 0.5;">&laquo; Prev</span>
+            {% endif %}
+            
+            <!-- Page Numbers -->
+            {% for page in (1..paginator.total_pages) %}
+                {% if page == paginator.page %}
+                    <span style="padding: 8px 12px; background: #28a745; color: white; border-radius: 4px;">{{ page }}</span>
+                {% elsif page == 1 %}
+                    <a href="{{ '/' | relative_url }}" style="padding: 8px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">{{ page }}</a>
+                {% else %}
+                    <a href="{{ site.paginate_path | relative_url | replace: ':num', page }}" style="padding: 8px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+            
+            <!-- Next Page -->
+            {% if paginator.next_page %}
+                <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-btn" style="padding: 8px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">Next &raquo;</a>
+            {% else %}
+                <span class="pagination-btn disabled" style="padding: 8px 12px; background: #6c757d; color: white; border-radius: 4px; opacity: 0.5;">Next &raquo;</span>
+            {% endif %}
+            
+            <!-- Last Page -->
+            {% if paginator.page < paginator.total_pages %}
+                <a href="{{ site.paginate_path | relative_url | replace: ':num', paginator.total_pages }}" class="pagination-btn" style="padding: 8px 12px; background: #007bff; color: white; text-decoration: none; border-radius: 4px;">Last</a>
+            {% endif %}
+        </div>
+        
+        <!-- Test Links -->
+        <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #dee2e6;">
+            <h4>Test Links (Klik untuk test):</h4>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="/" style="color: #007bff;">Home</a>
+                <a href="/page/2/" style="color: #007bff;">Page 2</a>
+                <a href="/page/3/" style="color: #007bff;">Page 3</a>
+                <a href="{{ site.paginate_path | relative_url | replace: ':num', 2 }}" style="color: #007bff;">Page 2 (via variable)</a>
+            </div>
+        </div>
     </div>
-
-    <!-- Next Page -->
-    {% if paginator.next_page %}
-        <a href="{{ paginator.next_page_path | relative_url }}" class="pagination-next">Berikutnya &raquo;</a>
     {% else %}
-        <span class="pagination-next disabled">Berikutnya &raquo;</span>
+    <div style="background: #fff3cd; color: #856404; padding: 15px; margin: 20px 0; border-radius: 5px;">
+        <strong>ℹ️ Pagination tidak ditampilkan karena:</strong>
+        <ul>
+            <li>Total halaman: {{ paginator.total_pages }}</li>
+            <li>Total postingan: {{ site.posts.size }}</li>
+            <li>Posts per halaman: 6</li>
+            <li>Anda perlu minimal 7 postingan untuk melihat pagination</li>
+        </ul>
+    </div>
     {% endif %}
-</div>
-{% endif %}
-
-<!-- Debug Info - Hapus setelah paginasi bekerja -->
-{% if paginator.total_pages <= 1 %}
-<div style="background: #fff3cd; color: #856404; padding: 10px; margin: 20px 0; border-radius: 4px; border: 1px solid #ffeeba;">
-    <strong>Debug Info:</strong><br>
-    Total Posts: {{ site.posts.size }}<br>
-    Paginator Total Pages: {{ paginator.total_pages }}<br>
-    Posts per page: 6<br>
-    {% if site.posts.size > 6 %}
-        <strong>Info:</strong> Anda memiliki {{ site.posts.size }} postingan, seharusnya ada {{ site.posts.size | divided_by: 6 | plus: 1 }} halaman. Paginasi tidak muncul karena ada masalah konfigurasi.
-    {% else %}
-        <strong>Info:</strong> Anda hanya memiliki {{ site.posts.size }} postingan, kurang dari 6, jadi paginasi tidak ditampilkan.
-    {% endif %}
+{% else %}
+<div style="background: #f8d7da; color: #721c24; padding: 15px; margin: 20px 0; border-radius: 5px;">
+    <strong>❌ ERROR: Paginator tidak ditemukan!</strong>
+    <p>Pastikan:</p>
+    <ol>
+        <li>Plugin jekyll-paginate terinstal: <code>gem install jekyll-paginate</code></li>
+        <li>Di _config.yml ada: <code>plugins: [jekyll-paginate]</code></li>
+        <li>Di _config.yml ada: <code>paginate: 6</code> dan <code>paginate_path: "/page/:num/"</code></li>
+        <li>Restart Jekyll server: <code>bundle exec jekyll clean && bundle exec jekyll serve</code></li>
+    </ol>
 </div>
 {% endif %}
 
 <style>
-/* Card Styling */
+/* CSS Styling (sama seperti sebelumnya) */
 .card {
     background: #fff;
     border-radius: 8px;
@@ -160,7 +230,6 @@ title: Home
     text-decoration: none;
 }
 
-/* Meta Sections */
 .post-meta-section {
     margin: 12px 0;
     display: flex;
@@ -184,7 +253,6 @@ title: Home
     flex: 1;
 }
 
-/* Badge Styling */
 .cat-badge, .label-badge, .tag-badge {
     display: inline-block;
     font-size: 12px;
@@ -195,7 +263,6 @@ title: Home
     font-weight: 500;
 }
 
-/* Categories */
 .cat-badge {
     background: #e8f4fd;
     color: #0288d1;
@@ -208,7 +275,6 @@ title: Home
     border-color: #0288d1;
 }
 
-/* Labels */
 .label-badge {
     background: #f3e8ff;
     color: #7b1fa2;
@@ -221,7 +287,6 @@ title: Home
     border-color: #7b1fa2;
 }
 
-/* Tags */
 .tag-badge {
     background: #e8f5e9;
     color: #2e7d32;
@@ -234,7 +299,6 @@ title: Home
     border-color: #2e7d32;
 }
 
-/* Excerpt */
 .card-excerpt {
     font-size: 15px;
     line-height: 1.6;
@@ -242,7 +306,6 @@ title: Home
     margin: 16px 0 12px 0;
 }
 
-/* Read More */
 .read-more {
     display: inline-block;
     font-size: 14px;
@@ -257,82 +320,6 @@ title: Home
     text-decoration: underline;
 }
 
-/* Pagination Styling */
-.pagination {
-    margin: 40px 0 20px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
-}
-
-.pagination-prev, .pagination-next {
-    display: inline-block;
-    padding: 8px 16px;
-    background: #f8f9fa;
-    color: #2c3e50;
-    text-decoration: none;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    border: 1px solid #dee2e6;
-}
-
-.pagination-prev:hover, .pagination-next:hover {
-    background: #3498db;
-    color: #fff;
-    border-color: #3498db;
-}
-
-.pagination-prev.disabled, .pagination-next.disabled {
-    background: #e9ecef;
-    color: #adb5bd;
-    border-color: #dee2e6;
-    cursor: not-allowed;
-    pointer-events: none;
-}
-
-.pagination-pages {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-
-.pagination-pages a, .pagination-pages span {
-    display: inline-block;
-    min-width: 36px;
-    height: 36px;
-    line-height: 36px;
-    text-align: center;
-    border-radius: 50%;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.2s ease;
-}
-
-.pagination-pages a {
-    background: #f8f9fa;
-    color: #2c3e50;
-    border: 1px solid #dee2e6;
-}
-
-.pagination-pages a:hover {
-    background: #3498db;
-    color: #fff;
-    border-color: #3498db;
-}
-
-.pagination-pages span.current {
-    background: #3498db;
-    color: #fff;
-    border: 1px solid #3498db;
-}
-
-/* No Posts */
 .no-posts {
     text-align: center;
     padding: 60px 20px;
@@ -341,7 +328,6 @@ title: Home
     color: #6c757d;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .card-body {
         padding: 18px;
@@ -358,15 +344,6 @@ title: Home
     .meta-label {
         min-width: auto;
         margin-bottom: 4px;
-    }
-    
-    .pagination {
-        flex-direction: column;
-        gap: 10px;
-    }
-    
-    .pagination-pages {
-        order: -1;
     }
 }
 </style>
