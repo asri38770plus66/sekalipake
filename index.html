@@ -2,30 +2,85 @@
 layout: default
 ---
 
-<h1>TEST PAGINATION</h1>
-
-{% if paginator %}
-  <p>Paginator Aktif ✅</p>
-{% else %}
-  <p>Paginator Tidak Aktif ❌</p>
-{% endif %}
-
-<hr>
+<div class="post-list">
 
 {% for post in paginator.posts %}
-  <h2>{{ post.title }}</h2>
+
+  <article class="post-item">
+
+    <h2>
+      <a href="{{ site.baseurl }}{{ post.url }}">
+        {{ post.title }}
+      </a>
+    </h2>
+
+    <!-- EXCERPT -->
+    <p class="excerpt">
+      {{ post.excerpt | strip_html | truncatewords: 30 }}
+    </p>
+
+    <!-- META: Categories, Labels, Tags -->
+    <p class="meta">
+
+      {% for cat in post.categories %}
+        <a href="{{ site.baseurl }}/categories/?q={{ cat | slugify }}">
+          {{ cat }}
+        </a>
+      {% endfor %}
+
+      {% for label in post.labels %}
+        <a href="{{ site.baseurl }}/labels/?q={{ label | slugify }}">
+          {{ label }}
+        </a>
+      {% endfor %}
+
+      {% for tag in post.tags %}
+        <a href="{{ site.baseurl }}/tags/?q={{ tag | slugify }}">
+          {{ tag }}
+        </a>
+      {% endfor %}
+
+    </p>
+
+  </article>
+
 {% endfor %}
 
-<hr>
+</div>
 
+
+<!-- PAGINATION -->
 {% if paginator.total_pages > 1 %}
+
+<div class="pagination">
+
   {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}">Prev</a>
+    <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">
+      &laquo; Prev
+    </a>
   {% endif %}
 
-  Page {{ paginator.page }} of {{ paginator.total_pages }}
+  {% for page in (1..paginator.total_pages) %}
+
+    {% if page == paginator.page %}
+      <span class="current">{{ page }}</span>
+
+    {% elsif page == 1 %}
+      <a href="{{ site.baseurl }}/">1</a>
+
+    {% else %}
+      <a href="{{ site.baseurl }}/page{{ page }}/">{{ page }}</a>
+
+    {% endif %}
+
+  {% endfor %}
 
   {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}">Next</a>
+    <a href="{{ site.baseurl }}{{ paginator.next_page_path }}">
+      Next &raquo;
+    </a>
   {% endif %}
+
+</div>
+
 {% endif %}
