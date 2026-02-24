@@ -1,13 +1,12 @@
-name: Mirror Upstream (Force Sync)
+name: Mirror Upstream (Force Except Workflows)
 
 on:
   schedule:
-    - cron: "0 * * * *"   # tiap 1 jam
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
-  workflows: write
 
 jobs:
   mirror:
@@ -25,6 +24,13 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
+      - name: Save local workflows
+        run: |
+          mkdir -p /tmp/workflows
+          if [ -d ".github/workflows" ]; then
+            cp -r .github/workflows /tmp/workflows/
+          fi
+
       - name: Add upstream
         run: |
           git remote add upstream https://github.com/nengmaya538/kahiji.git
@@ -32,9 +38,18 @@ jobs:
 
       - name: Hard reset to upstream
         run: |
-          git checkout master
           git reset --hard upstream/master
+
+      - name: Restore workflows
+        run: |
+          rm -rf .github/workflows
+          if [ -d "/tmp/workflows/workflows" ]; then
+            mkdir -p .github
+            cp -r /tmp/workflows/workflows .github/
+          fi
 
       - name: Force push to fork
         run: |
+          git add .
+          git commit -m "Force sync except workflows" || echo "No changes"
           git push origin master --force
