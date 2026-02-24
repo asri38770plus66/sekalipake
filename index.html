@@ -1,179 +1,197 @@
 ---
-layout: default
+layout: null
 ---
 
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ site.title }}</title>
+
 <style>
-/* POST LIST */
-.post-item {
-  padding: 10px 0;
-  border-bottom: 1px solid #eee;
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;
+  font-size:14px;
+  line-height:1.5;
+  color:#222;
+  background:#fff;
+  padding:12px;
+  max-width:720px;
+  margin:auto;
 }
 
-.post-item h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 4px;
+.post-item{
+  padding:10px 0;
+  border-bottom:1px solid #eee;
 }
 
-.post-item h2 a {
-  color: #111;
-  text-decoration: none;
+.post-item h2{
+  font-size:17px;
+  margin-bottom:4px;
 }
 
-.post-item h2 a:hover {
-  text-decoration: underline;
+.post-item h2 a{
+  text-decoration:none;
+  color:#111;
 }
 
-/* EXCERPT */
-.excerpt {
-  font-size: 14px;
-  color: #555;
-  margin-bottom: 6px;
+.post-item h2 a:hover{
+  text-decoration:underline;
 }
 
-/* META LINKS */
-.meta {
-  font-size: 12px;
+.excerpt{
+  color:#555;
+  font-size:13px;
+  margin-bottom:6px;
 }
 
-.meta a {
-  display: inline-block;
-  color: #666;
-  text-decoration: none;
-  margin-right: 6px;
-  margin-bottom: 4px;
-  padding: 2px 6px;
-  border: 1px solid #ddd;
-  border-radius: 3px;
+/* META */
+.meta{
+  font-size:11px;
 }
 
-.meta a:hover {
-  background: #f5f5f5;
+.meta a{
+  display:inline-block;
+  padding:2px 6px;
+  margin:2px 6px 2px 0;
+  border-radius:3px;
+  text-decoration:none;
+  font-weight:500;
 }
 
-/* PAGINATION */
-.pagination {
-  margin-top: 14px;
-  font-size: 14px;
+/* Category - biru */
+.meta .cat{
+  background:#e8f1ff;
+  color:#1a4fb3;
+  border:1px solid #c7dcff;
+}
+
+/* Label - hijau */
+.meta .label{
+  background:#e9f7ef;
+  color:#1b7f4c;
+  border:1px solid #c9ead6;
+}
+
+/* Tag - abu */
+.meta .tag{
+  background:#f3f3f3;
+  color:#555;
+  border:1px solid #ddd;
+}
+
+.meta a:hover{opacity:.85}
+
+/* Pagination */
+.pagination{
+  margin-top:14px;
+  font-size:13px;
 }
 
 .pagination a,
-.pagination span {
-  display: inline-block;
-  margin: 2px 4px 2px 0;
-  padding: 4px 8px;
-  border: 1px solid #ddd;
-  text-decoration: none;
-  color: #333;
-  border-radius: 3px;
+.pagination span{
+  display:inline-block;
+  padding:4px 8px;
+  margin:2px 4px 2px 0;
+  border:1px solid #ddd;
+  border-radius:3px;
+  text-decoration:none;
+  color:#333;
 }
 
-.pagination a:hover {
-  background: #f0f0f0;
+.pagination .current{
+  background:#333;
+  color:#fff;
+  border-color:#333;
 }
 
-.pagination .current {
-  background: #333;
-  color: #fff;
-  border-color: #333;
-}
-
-/* MOBILE OPTIMIZED */
-@media (max-width: 600px) {
-  body {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .post-item h2 {
-    font-size: 16px;
-  }
-
-  .excerpt {
-    font-size: 13px;
-  }
+.pagination a:hover{
+  background:#f0f0f0;
 }
 </style>
-
-<div class="post-list">
+</head>
+<body>
 
 {% for post in paginator.posts %}
 
-  <article class="post-item">
+<div class="post-item">
 
-    <h2>
-      <a href="{{ site.baseurl }}{{ post.url }}">
-        {{ post.title }}
+  <h2>
+    <a href="{{ site.baseurl }}{{ post.url }}">
+      {{ post.title }}
+    </a>
+  </h2>
+
+  <div class="excerpt">
+    {{ post.excerpt | strip_html | truncatewords: 28 }}
+  </div>
+
+  <div class="meta">
+
+    {% for cat in post.categories %}
+      <a class="cat"
+         href="{{ site.baseurl }}/categories/?q={{ cat | slugify }}">
+         {{ cat }}
       </a>
-    </h2>
+    {% endfor %}
 
-    <!-- EXCERPT -->
-    <p class="excerpt spo">
-      {{ post.excerpt | strip_html | truncatewords: 150 }}
-    </p>
+    {% for label in post.labels %}
+      <a class="label"
+         href="{{ site.baseurl }}/labels/?q={{ label | slugify }}">
+         {{ label }}
+      </a>
+    {% endfor %}
 
-    <!-- META: Categories, Labels, Tags -->
-    <p class="meta">
+    {% for tag in post.tags %}
+      <a class="tag"
+         href="{{ site.baseurl }}/tags/?q={{ tag | slugify }}">
+         {{ tag }}
+      </a>
+    {% endfor %}
 
-      {% for cat in post.categories %}
-        <a href="{{ site.baseurl }}/categories/?q={{ cat | slugify }}">
-          {{ cat }}
-        </a>
-      {% endfor %}
-
-      {% for label in post.labels %}
-        <a href="{{ site.baseurl }}/labels/?q={{ label | slugify }}">
-          {{ label }}
-        </a>
-      {% endfor %}
-
-      {% for tag in post.tags %}
-        <a href="{{ site.baseurl }}/tags/?q={{ tag | slugify }}">
-          {{ tag }}
-        </a>
-      {% endfor %}
-
-    </p>
-
-  </article>
-
-{% endfor %}
+  </div>
 
 </div>
 
+{% endfor %}
 
-<!-- PAGINATION -->
+
 {% if paginator.total_pages > 1 %}
 
 <div class="pagination">
 
-  {% if paginator.previous_page %}
-    <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">
-      &laquo; Prev
-    </a>
+{% if paginator.previous_page %}
+  <a href="{{ site.baseurl }}{{ paginator.previous_page_path }}">
+    &laquo;
+  </a>
+{% endif %}
+
+{% for page in (1..paginator.total_pages) %}
+
+  {% if page == paginator.page %}
+    <span class="current">{{ page }}</span>
+
+  {% elsif page == 1 %}
+    <a href="{{ site.baseurl }}/">1</a>
+
+  {% else %}
+    <a href="{{ site.baseurl }}/page{{ page }}/">{{ page }}</a>
+
   {% endif %}
 
-  {% for page in (1..paginator.total_pages) %}
+{% endfor %}
 
-    {% if page == paginator.page %}
-      <span class="current">{{ page }}</span>
-
-    {% elsif page == 1 %}
-      <a href="{{ site.baseurl }}/">1</a>
-
-    {% else %}
-      <a href="{{ site.baseurl }}/page{{ page }}/">{{ page }}</a>
-
-    {% endif %}
-
-  {% endfor %}
-
-  {% if paginator.next_page %}
-    <a href="{{ site.baseurl }}{{ paginator.next_page_path }}">
-      Next &raquo;
-    </a>
-  {% endif %}
+{% if paginator.next_page %}
+  <a href="{{ site.baseurl }}{{ paginator.next_page_path }}">
+    &raquo;
+  </a>
+{% endif %}
 
 </div>
 
 {% endif %}
+
+</body>
+</html>
