@@ -34,3 +34,4 @@ jobs:
           git add categories
           git diff --cached --quiet || git commit -m "Auto generate categories"
           git push
+
