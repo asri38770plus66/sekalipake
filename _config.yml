@@ -23,7 +23,7 @@ jekyll-archives:
     
 # Pagination - PERBAIKI INI
 paginate: 6  # Ubah dari 99 ke 6
-paginate_path: "/page/:num/"  # Tambah tanda kutip dan slash di akhir
+paginate_path: "page:num"  # Tambah tanda kutip dan slash di akhir
     
 # Markdown
 markdown: kramdown
