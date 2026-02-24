@@ -11,25 +11,37 @@ layout: null
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
+
 body{
   font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Arial,sans-serif;
   font-size:14px;
   line-height:1.5;
+  background:#f5f5f5;
   color:#222;
-  background:#fff;
   padding:12px;
   max-width:720px;
   margin:auto;
 }
 
+/* CARD POST */
 .post-item{
-  padding:10px 0;
-  border-bottom:1px solid #eee;
+  background:#fff;
+  padding:12px;
+  margin-bottom:12px;
+  border:1px solid #e5e5e5;
+  border-radius:6px;
+  box-shadow:0 1px 2px rgba(0,0,0,0.04);
+  transition:all .15s ease;
+}
+
+.post-item:hover{
+  border-color:#ccc;
+  box-shadow:0 2px 4px rgba(0,0,0,0.06);
 }
 
 .post-item h2{
-  font-size:17px;
-  margin-bottom:4px;
+  font-size:16px;
+  margin-bottom:6px;
 }
 
 .post-item h2 a{
@@ -41,10 +53,11 @@ body{
   text-decoration:underline;
 }
 
+/* EXCERPT */
 .excerpt{
-  color:#555;
   font-size:13px;
-  margin-bottom:6px;
+  color:#555;
+  margin-bottom:8px;
 }
 
 /* META */
@@ -56,26 +69,26 @@ body{
   display:inline-block;
   padding:2px 6px;
   margin:2px 6px 2px 0;
-  border-radius:3px;
+  border-radius:4px;
   text-decoration:none;
   font-weight:500;
 }
 
-/* Category - biru */
+/* Category */
 .meta .cat{
   background:#e8f1ff;
   color:#1a4fb3;
   border:1px solid #c7dcff;
 }
 
-/* Label - hijau */
+/* Label */
 .meta .label{
   background:#e9f7ef;
   color:#1b7f4c;
   border:1px solid #c9ead6;
 }
 
-/* Tag - abu */
+/* Tag */
 .meta .tag{
   background:#f3f3f3;
   color:#555;
@@ -84,21 +97,23 @@ body{
 
 .meta a:hover{opacity:.85}
 
-/* Pagination */
+/* PAGINATION */
 .pagination{
-  margin-top:14px;
+  margin-top:16px;
+  text-align:center;
   font-size:13px;
 }
 
 .pagination a,
 .pagination span{
   display:inline-block;
-  padding:4px 8px;
-  margin:2px 4px 2px 0;
+  padding:5px 9px;
+  margin:3px;
   border:1px solid #ddd;
-  border-radius:3px;
+  border-radius:4px;
   text-decoration:none;
   color:#333;
+  background:#fff;
 }
 
 .pagination .current{
@@ -108,7 +123,7 @@ body{
 }
 
 .pagination a:hover{
-  background:#f0f0f0;
+  background:#eee;
 }
 </style>
 </head>
