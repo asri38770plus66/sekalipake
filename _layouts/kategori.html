@@ -6,71 +6,87 @@
 <!-- Script SEO Otomatis khusus untuk halaman Categories -->
 <script>
 (function () {
+  // Fungsi untuk format teks (sama dengan di header1.html)
+  const formatText = str => {
+    if (!str) return '';
+    return str
+      .replace(/[-_]/g, ' ')
+      .replace(/\+/g, ' ')
+      .replace(/\b\w/g, c => c.toUpperCase());
+  };
+
   // Cek apakah ini halaman categories
   const pathname = location.pathname;
   const categoriesPattern = /^\/categories\//i;
-  
-  // Jika bukan halaman categories, hentikan script
-  if (!categoriesPattern.test(pathname)) {
-    return;
-  }
-  
-  // Ambil nama kategori dari URL
-  let categoryName = pathname.replace(/^\/categories\//, '')  // Hapus '/categories/'
-                           .replace(/\/$/, '')                // Hapus trailing slash
-                           .split('/')[0];                     // Ambil hanya bagian pertama
-  
-  // Format nama kategori: ganti dash dengan spasi dan kapitalisasi
-  const formatText = str => str
-    .replace(/[-_]/g, ' ')
-    .replace(/\+/g, ' ')
-    .replace(/\b\w/g, c => c.toUpperCase());
-  
-  categoryName = decodeURIComponent(categoryName);
-  const formattedCategory = formatText(categoryName);
   
   // Ambil domain untuk keperluan title dan description
   const hostname = location.hostname;
   let siteName = hostname.split('.')[0];
   if (siteName.toLowerCase() === 'www') siteName = hostname.split('.')[1] || '';
-  siteName = formatText(siteName);
+  const formattedSiteName = formatText(siteName);
   
-  // Buat title: "Nama Kategori - Nama Situs"
-  const titleText = `${formattedCategory} - ${siteName}`;
+  // DEFAULT: Set title dasar untuk semua halaman (akan di-overwrite jika categories)
+  let titleText = formattedSiteName;
+  let descriptionText = `Find photos, videos, and other content at ${formattedSiteName}.`;
+  let categoryData = null;
   
-  // Set title tag
+  // JIKA HALAMAN CATEGORIES: Overwrite dengan format khusus
+  if (categoriesPattern.test(pathname)) {
+    // Ambil nama kategori dari URL
+    let categoryName = pathname.replace(/^\/categories\//, '')
+                             .replace(/\/$/, '')
+                             .split('/')[0];
+    
+    categoryName = decodeURIComponent(categoryName);
+    const formattedCategory = formatText(categoryName);
+    
+    // Buat title: "Nama Kategori - Nama Situs"
+    titleText = `${formattedCategory} - ${formattedSiteName}`;
+    
+    // Buat meta description khusus categories
+    descriptionText = `Find photos, videos, and other content about ${formattedCategory} at ${formattedSiteName}.`;
+    
+    // Simpan data kategori untuk digunakan header1.html
+    categoryData = {
+      name: formattedCategory,
+      raw: categoryName
+    };
+  }
+  
+  // SET TITLE TAG
   let titleTag = document.querySelector('title') || document.createElement('title');
   titleTag.textContent = titleText;
   if (!titleTag.parentNode) document.head.appendChild(titleTag);
   
-  // Buat meta description dalam bahasa Inggris
-  // Format: "Find photos, videos, and other content about 'category-name' at 'current-domain'"
-  const descriptionText = `Find photos, videos, and other content about ${formattedCategory} at ${siteName}.`;
-  
-  // Cek apakah meta description sudah ada (mungkin dari head-categories.html)
+  // SET META DESCRIPTION
   let metaDesc = document.querySelector('meta[name="description"]');
   if (metaDesc) {
-    // Update kontennya jika sudah ada
     metaDesc.content = descriptionText;
   } else {
-    // Buat baru jika belum ada
     metaDesc = document.createElement('meta');
     metaDesc.name = 'description';
     metaDesc.content = descriptionText;
     document.head.appendChild(metaDesc);
   }
   
-  // Set canonical URL
+  // SET CANONICAL URL
   let canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
   canonical.setAttribute('rel', 'canonical');
   canonical.setAttribute('href', location.href);
   if (!canonical.parentNode) document.head.appendChild(canonical);
   
-  // HAPUS bagian meta robots karena sudah ada di head-categories.html
+  // EXPORT DATA ke window object untuk digunakan header1.html
+  window.seoData = {
+    siteName: formattedSiteName,
+    isCategories: categoriesPattern.test(pathname),
+    categoryData: categoryData,
+    title: titleText,
+    description: descriptionText
+  };
   
 })();
 </script>
-<!-- Akhir Script SEO Otomatis untuk halaman Categories -->
+<!-- Akhir Script SEO Otomatis -->
 
 {% include head-categories.html %}
 </head>
