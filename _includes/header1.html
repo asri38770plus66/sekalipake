@@ -21,10 +21,312 @@
 </header>
 
 <style>
-/* ... (semua style Anda tetap sama) ... */
+/* Header blog melayang dengan class unik */
+.blog-header-main.floating-header-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: #fff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  border-bottom: none;
+}
+
+.header-content-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 16px;
+}
+
+/* Judul blog yang lebih besar dengan class unik */
+.blog-title-main {
+  margin: 0;
+  font-size: 20px;
+  color: #000;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
 
 .title-fallback {
   display: inline;
+}
+
+.nav-actions-main {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* Tombol menu - HITAM TANPA BACKGROUND dengan class unik */
+.menu-btn-main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: transparent;
+  border: none;
+  color: #000;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 0;
+  transition: opacity 0.2s ease;
+}
+
+.menu-btn-main:hover {
+  opacity: 0.6;
+  background: transparent;
+}
+
+.menu-btn-main:active {
+  opacity: 0.4;
+}
+
+.menu-icon-main {
+  width: 24px;
+  height: 24px;
+  stroke: #000000;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Menu panel dropdown dengan ID unik */
+#blogMenuPanel {
+  display: none;
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  padding: 16px;
+  position: fixed;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+}
+
+#blogMenuPanel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+#blogMenuPanel li {
+  margin: 0;
+  padding: 0;
+}
+
+#blogMenuPanel a {
+  color: #000;
+  text-decoration: none;
+  display: block;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+#blogMenuPanel a:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* DESKTOP - Menu dengan layout yang bagus untuk layar besar */
+@media (min-width: 1025px) {
+  .blog-header-main.floating-header-main {
+    padding: 12px 24px;
+  }
+  
+  .header-content-main {
+    max-width: 1400px;
+  }
+  
+  .blog-title-main {
+    font-size: 22px;
+  }
+  
+  .menu-btn-main {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .menu-icon-main {
+    width: 26px;
+    height: 26px;
+  }
+  
+  /* Menu untuk DESKTOP */
+  #blogMenuPanel {
+    top: 65px;
+    right: 24px;
+    padding: 20px;
+    min-width: 220px;
+    max-width: 250px;
+  }
+  
+  #blogMenuPanel a {
+    padding: 12px 16px;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  
+  #blogMenuPanel li:not(:last-child) a {
+    border-bottom: 1px solid #f0f0f0;
+  }
+}
+
+/* TABLET - Antara desktop dan mobile */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .blog-header-main.floating-header-main {
+    padding: 10px 16px;
+  }
+  
+  .header-content-main {
+    gap: 14px;
+  }
+  
+  .blog-title-main {
+    font-size: 18px;
+  }
+  
+  .menu-btn-main {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .menu-icon-main {
+    width: 22px;
+    height: 22px;
+    stroke-width: 2.5;
+  }
+  
+  /* Menu untuk TABLET */
+  #blogMenuPanel {
+    top: 58px;
+    right: 16px;
+    padding: 16px;
+    min-width: 200px;
+    max-width: 220px;
+  }
+  
+  #blogMenuPanel a {
+    padding: 10px 14px;
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+  
+  #blogMenuPanel li:not(:last-child) a {
+    border-bottom: 1px solid #f0f0f0;
+  }
+}
+
+/* MOBILE - Optimal untuk layar kecil */
+@media (max-width: 768px) {
+  .blog-header-main.floating-header-main {
+    padding: 8px 12px;
+  }
+  
+  .blog-title-main {
+    font-size: 17px;
+  }
+  
+  .menu-btn-main {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .menu-icon-main {
+    width: 20px;
+    height: 20px;
+    stroke-width: 2.5;
+  }
+  
+  /* Menu untuk MOBILE */
+  #blogMenuPanel {
+    top: 56px;
+    right: 12px;
+    padding: 14px;
+    min-width: 180px;
+    max-width: 200px;
+  }
+  
+  #blogMenuPanel a {
+    padding: 9px 12px;
+    font-size: 13px;
+    margin-bottom: 2px;
+  }
+  
+  #blogMenuPanel li:not(:last-child) a {
+    border-bottom: 1px solid #f0f0f0;
+  }
+}
+
+/* MOBILE KECIL - Sangat compact */
+@media (max-width: 480px) {
+  .blog-header-main.floating-header-main {
+    padding: 8px 10px;
+  }
+  
+  .header-content-main {
+    gap: 12px;
+  }
+  
+  .blog-title-main {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  .menu-btn-main {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .menu-icon-main {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5;
+  }
+  
+  /* Menu untuk MOBILE KECIL */
+  #blogMenuPanel {
+    top: 54px;
+    right: 10px;
+    padding: 12px;
+    min-width: 160px;
+    max-width: 180px;
+  }
+  
+  #blogMenuPanel a {
+    padding: 8px 10px;
+    font-size: 12px;
+    margin-bottom: 2px;
+  }
+  
+  #blogMenuPanel li:not(:last-child) a {
+    border-bottom: 1px solid #f0f0f0;
+  }
+}
+
+/* Tambah padding body untuk header fixed */
+body {
+  padding-top: 60px !important;
+}
+
+/* Pastikan konten tidak tertutup header */
+main, .content {
+  margin-top: 20px !important;
 }
 </style>
 
@@ -86,23 +388,18 @@
     // KASUS 3: HALAMAN LAINNYA (ARTIKEL, PAGE, DLL)
     
     // Coba ambil judul dari meta property atau elemen tertentu
-    // Mediumish theme biasanya menaruh judul di:
-    // 1. Meta property "og:title"
-    // 2. Meta name "title" 
-    // 3. Atau elemen .post-title
-    
     let pageTitle = '';
     
     // Coba ambil dari meta property og:title
     const ogTitle = document.querySelector('meta[property="og:title"]');
-    if (ogTitle) {
+    if (ogTitle && ogTitle.getAttribute('content')) {
       pageTitle = ogTitle.getAttribute('content');
     }
     
     // Jika tidak ada, coba dari meta name="title"
     if (!pageTitle) {
       const metaTitle = document.querySelector('meta[name="title"]');
-      if (metaTitle) {
+      if (metaTitle && metaTitle.getAttribute('content')) {
         pageTitle = metaTitle.getAttribute('content');
       }
     }
@@ -112,6 +409,14 @@
       const postTitle = document.querySelector('.post-title');
       if (postTitle) {
         pageTitle = postTitle.textContent.trim();
+      }
+    }
+    
+    // Jika masih tidak ada, coba dari elemen h1 yang sudah ada di artikel
+    if (!pageTitle) {
+      const articleH1 = document.querySelector('article h1, .post h1, .page h1');
+      if (articleH1) {
+        pageTitle = articleH1.textContent.trim();
       }
     }
     
@@ -137,11 +442,68 @@
   }
 
   // Optional: Update title tag juga jika belum di-set
-  if (!document.querySelector('title') || document.querySelector('title').textContent === '') {
+  if (!document.querySelector('title') || document.querySelector('title').textContent === '' || document.querySelector('title').textContent === 'Loading...') {
     document.title = h1Text;
   }
   
 })();
 
-// ... (kode JavaScript untuk toggle menu tetap sama) ...
+// Fungsi untuk toggle menu dengan ID unik
+const toggleBtnBlog = document.getElementById('blogMenuToggle');
+const menuPanelBlog = document.getElementById('blogMenuPanel');
+const iconMenuBlog = document.getElementById('blogIconMenu');
+const iconCloseBlog = document.getElementById('blogIconClose');
+
+if (toggleBtnBlog && menuPanelBlog && iconMenuBlog && iconCloseBlog) {
+  toggleBtnBlog.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const isVisible = menuPanelBlog.style.display === 'block';
+    
+    // Toggle display
+    menuPanelBlog.style.display = isVisible ? 'none' : 'block';
+    iconMenuBlog.style.display = isVisible ? 'inline' : 'none';
+    iconCloseBlog.style.display = isVisible ? 'none' : 'inline';
+    
+    // Posisikan menu panel di bawah tombol
+    if (!isVisible) {
+      const btnRect = toggleBtnBlog.getBoundingClientRect();
+      menuPanelBlog.style.top = (btnRect.bottom + 5) + 'px';
+      menuPanelBlog.style.right = (window.innerWidth - btnRect.right) + 'px';
+    }
+  });
+
+  // Tutup menu ketika klik di luar
+  document.addEventListener('click', (e) => {
+    if (!menuPanelBlog.contains(e.target) && !toggleBtnBlog.contains(e.target) && menuPanelBlog.style.display === 'block') {
+      menuPanelBlog.style.display = 'none';
+      iconMenuBlog.style.display = 'inline';
+      iconCloseBlog.style.display = 'none';
+    }
+  });
+
+  // Tutup menu dengan ESC key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && menuPanelBlog.style.display === 'block') {
+      menuPanelBlog.style.display = 'none';
+      iconMenuBlog.style.display = 'inline';
+      iconCloseBlog.style.display = 'none';
+    }
+  });
+
+  // Update posisi menu saat scroll atau resize
+  function updateBlogMenuPosition() {
+    if (menuPanelBlog.style.display === 'block') {
+      const btnRect = toggleBtnBlog.getBoundingClientRect();
+      menuPanelBlog.style.top = (btnRect.bottom + 5) + 'px';
+      menuPanelBlog.style.right = (window.innerWidth - btnRect.right) + 'px';
+    }
+  }
+
+  // Event listeners untuk update posisi
+  window.addEventListener('resize', updateBlogMenuPosition);
+  window.addEventListener('scroll', updateBlogMenuPosition);
+
+  // Inisialisasi posisi awal
+  window.addEventListener('load', updateBlogMenuPosition);
+}
 </script>
