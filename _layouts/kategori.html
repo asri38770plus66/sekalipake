@@ -1,60 +1,92 @@
-<!DOCTYPE html><html lang='en' loading='azy'><head loading='lazy'><meta charset='UTF-8' />
-  <!-- awal Seo Otomatis khusus untuk Homepage -->
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='UTF-8' />
+  
+<!-- Script SEO Otomatis khusus untuk halaman Categories -->
 <script>
 (function () {
-  const hostname = location.hostname;
+  // Cek apakah ini halaman categories
   const pathname = location.pathname;
-
-  let subdomainRaw = hostname.split('.')[0];
-  if (subdomainRaw.toLowerCase() === 'www') subdomainRaw = hostname.split('.')[1] || '';
-
+  const categoriesPattern = /^\/categories\//i;
+  
+  // Jika bukan halaman categories, hentikan script
+  if (!categoriesPattern.test(pathname)) {
+    return;
+  }
+  
+  // Ambil nama kategori dari URL
+  let categoryName = pathname.replace(/^\/categories\//, '')  // Hapus '/categories/'
+                           .replace(/\/$/, '')                // Hapus trailing slash
+                           .split('/')[0];                     // Ambil hanya bagian pertama
+  
+  // Format nama kategori: ganti dash dengan spasi dan kapitalisasi
   const formatText = str => str
     .replace(/[-_]/g, ' ')
-    .replace(/\+/g, ' ')         // tambahan: ganti + jadi spasi
+    .replace(/\+/g, ' ')
     .replace(/\b\w/g, c => c.toUpperCase());
-
-  const subdomain = formatText(subdomainRaw.trim());
-  const cleanPath = pathname.replace(/^\/+|\/+$/g, '');
-  const isHome = !cleanPath || /^index\.(html?|php)$/i.test(cleanPath);
-
-  let rawPageName = cleanPath.split('/').pop() || '';
-  rawPageName = rawPageName.replace(/\.[^.]+$/, '').trim(); // hilangkan ekstensi
-  rawPageName = decodeURIComponent(rawPageName);
-
-  let titleText = isHome
-    ? subdomain
-    : `${formatText(rawPageName)} - ${subdomain}`;
-
-  // Title
+  
+  categoryName = decodeURIComponent(categoryName);
+  const formattedCategory = formatText(categoryName);
+  
+  // Ambil domain untuk keperluan title dan description
+  const hostname = location.hostname;
+  let siteName = hostname.split('.')[0];
+  if (siteName.toLowerCase() === 'www') siteName = hostname.split('.')[1] || '';
+  siteName = formatText(siteName);
+  
+  // Buat title: "Nama Kategori - Nama Situs"
+  const titleText = `${formattedCategory} - ${siteName}`;
+  
+  // Set title tag
   let titleTag = document.querySelector('title') || document.createElement('title');
   titleTag.textContent = titleText;
   if (!titleTag.parentNode) document.head.appendChild(titleTag);
-
-  // Meta author
-  let metaAuthor = document.querySelector('meta[name="author"]') || document.createElement('meta');
-  metaAuthor.name = 'author';
-  metaAuthor.content = `${subdomain}`;
-  if (!metaAuthor.parentNode) document.head.appendChild(metaAuthor);
-
-  // Schema.org WebSite tanpa potentialAction (hilangkan sitelink search)
-  const schemaData = {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": subdomain,
-    "url": location.origin
-  };
-  let schemaScript = document.createElement('script');
-  schemaScript.type = 'application/ld+json';
-  schemaScript.textContent = JSON.stringify(schemaData);
-  document.head.appendChild(schemaScript);
-
-  // Canonical otomatis sesuai halaman saat ini
+  
+  // Buat meta description dalam bahasa Inggris
+  // Format: "Find photos, videos, and other content about 'category-name' at 'current-domain'"
+  const descriptionText = `Find photos, videos, and other content about ${formattedCategory} at ${siteName}.`;
+  
+  // Cek apakah meta description sudah ada (mungkin dari head-categories.html)
+  let metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) {
+    // Update kontennya jika sudah ada
+    metaDesc.content = descriptionText;
+  } else {
+    // Buat baru jika belum ada
+    metaDesc = document.createElement('meta');
+    metaDesc.name = 'description';
+    metaDesc.content = descriptionText;
+    document.head.appendChild(metaDesc);
+  }
+  
+  // Set canonical URL
   let canonical = document.querySelector('link[rel="canonical"]') || document.createElement('link');
   canonical.setAttribute('rel', 'canonical');
   canonical.setAttribute('href', location.href);
   if (!canonical.parentNode) document.head.appendChild(canonical);
-
+  
+  // HAPUS bagian meta robots karena sudah ada di head-categories.html
+  
 })();
 </script>
-<!-- akhir Seo Otomatis khusus untuk homepage -->
-  {% include head-categories.html %}</head><body loading='lazy'>{% include header1.html %}<main loading='lazy'>{% include main-categories.html %}</main>{% include awal-search.html %}<br /><br /><div loading='lazy'>{% include /ads/gobloggugel/sosmed.html %}</div>{% include footer-categories.html %}</body></html>
+<!-- Akhir Script SEO Otomatis untuk halaman Categories -->
+
+{% include head-categories.html %}
+</head>
+
+<body>
+{% include header1.html %}
+
+<main>
+{% include /kw/kw17.html %}
+{% include main-categories.html %}
+</main>
+
+{% include awal-search.html %}
+<br /><br />
+<div>{% include /ads/gobloggugel/sosmed.html %}</div>
+
+{% include footer-categories.html %}
+</body>
+</html>
