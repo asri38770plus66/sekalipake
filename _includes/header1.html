@@ -341,9 +341,9 @@ main, .content {
 </div>
 
 <script>
-// Fungsi utama untuk mengatur H1 berdasarkan kondisi
+// Fungsi utama untuk mengatur H1 berdasarkan kondisi (MENGGUNAKAN DATA DARI SEO SCRIPT)
 (function(){
-  // Fungsi untuk format teks (capitalize first letter each word)
+  // Fungsi untuk format teks (sama dengan di script utama)
   const formatText = str => {
     if (!str) return '';
     return str
@@ -352,20 +352,23 @@ main, .content {
       .replace(/\b\w/g, c => c.toUpperCase());
   };
 
-  // Ambil domain yang mengakses
+  // Ambil data dari script SEO (jika ada)
+  const seoData = window.seoData || {};
+  
+  // Ambil domain (fallback jika seoData tidak ada)
   const hostname = window.location.hostname;
   let siteName = hostname.split('.')[0];
   if (siteName.toLowerCase() === 'www') siteName = hostname.split('.')[1] || '';
-  const formattedSiteName = formatText(siteName);
+  const formattedSiteName = seoData.siteName || formatText(siteName);
 
   // Ambil path URL
   const pathname = window.location.pathname;
   const cleanPath = pathname.replace(/^\/+|\/+$/g, '');
   
-  // Cek apakah ini halaman categories
-  const isCategories = /^categories\//i.test(cleanPath);
+  // Cek apakah ini halaman categories (gunakan dari seoData atau cek manual)
+  const isCategories = seoData.isCategories !== undefined ? seoData.isCategories : /^categories\//i.test(cleanPath);
   
-  // Cek apakah ini homepage (root)
+  // Cek apakah ini homepage
   const isHome = !cleanPath || /^index\.(html?|php)$/i.test(cleanPath);
   
   let h1Text = '';
@@ -376,13 +379,18 @@ main, .content {
   } 
   else if (isCategories) {
     // KASUS 2: HALAMAN CATEGORIES
-    // Ambil nama kategori dari URL /categories/ini-kategori/
-    let categoryName = cleanPath.replace(/^categories\//, '')
-                               .replace(/\/$/, '')
-                               .split('/')[0];
-    categoryName = decodeURIComponent(categoryName);
-    const formattedCategory = formatText(categoryName);
-    h1Text = `${formattedCategory} - ${formattedSiteName}`;
+    if (seoData.categoryData) {
+      // Gunakan data dari script utama
+      h1Text = `${seoData.categoryData.name} - ${formattedSiteName}`;
+    } else {
+      // Fallback: parse dari URL
+      let categoryName = cleanPath.replace(/^categories\//, '')
+                                 .replace(/\/$/, '')
+                                 .split('/')[0];
+      categoryName = decodeURIComponent(categoryName);
+      const formattedCategory = formatText(categoryName);
+      h1Text = `${formattedCategory} - ${formattedSiteName}`;
+    }
   } 
   else {
     // KASUS 3: HALAMAN LAINNYA (ARTIKEL, PAGE, DLL)
@@ -422,10 +430,9 @@ main, .content {
     
     // Jika masih tidak ada, gunakan path terakhir
     if (!pageTitle) {
-      // Ambil path terakhir dari URL
       const pathSegments = cleanPath.split('/').filter(s => s);
       let lastSegment = pathSegments[pathSegments.length - 1] || '';
-      lastSegment = lastSegment.replace(/\.[^.]+$/, ''); // hapus ekstensi
+      lastSegment = lastSegment.replace(/\.[^.]+$/, '');
       lastSegment = decodeURIComponent(lastSegment);
       pageTitle = formatText(lastSegment);
     }
@@ -441,10 +448,7 @@ main, .content {
     h1Element.textContent = h1Text;
   }
 
-  // Optional: Update title tag juga jika belum di-set
-  if (!document.querySelector('title') || document.querySelector('title').textContent === '' || document.querySelector('title').textContent === 'Loading...') {
-    document.title = h1Text;
-  }
+  // TIDAK update title di sini - biarkan script SEO yang handle
   
 })();
 
