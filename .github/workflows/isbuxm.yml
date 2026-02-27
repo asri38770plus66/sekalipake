@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          ref: master
+          ref: main
 
       - name: Configure git
         run: |
@@ -33,12 +33,12 @@ jobs:
 
       - name: Add upstream
         run: |
-          git remote add upstream https://github.com/nengmaya538/kahiji.git
+          git remote add upstream https://github.com/nengmaya538/kadua.git
           git fetch upstream
 
       - name: Hard reset to upstream
         run: |
-          git reset --hard upstream/master
+          git reset --hard upstream/main
 
       - name: Restore workflows
         run: |
@@ -52,4 +52,4 @@ jobs:
         run: |
           git add .
           git commit -m "Force sync except workflows" || echo "No changes"
-          git push origin master --force
+          git push origin main --force
