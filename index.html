@@ -81,6 +81,11 @@ layout: null
 <!-- akhir Seo Otomatis khusus untuk homepage -->
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"/>
 
+<link rel="sitemap" type="application/xml" href="{{ '/sitemap.xml' | absolute_url }}">
+<link rel="sitemap" type="application/xml" href="{{ '/sitemap-categories.xml' | absolute_url }}">
+<link rel="alternate" type="application/rss+xml" href="{{ '/feed.xml' | absolute_url }}">
+
+	
 	{% include verif.html %}
   </head>
 <body loading="lazy">
