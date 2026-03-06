@@ -5,12 +5,9 @@ layout: null
 
 
 
-
 <center><b>Latest Posts</b></center>
 
-{% for post in paginator.posts %}
-
-{% if post.categories contains "seo01" %}
+{% for post in site.categories.seo01 %}
 
 <div class="post-item">
   <h2>
@@ -31,9 +28,8 @@ layout: null
 
 </div>
 
-{% endif %}
-
 {% endfor %}
+
 
 
 
