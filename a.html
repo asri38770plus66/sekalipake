@@ -3,9 +3,14 @@ layout: null
 ---
 
 
+
+
+
 <center><b>Latest Posts</b></center>
 
-{% for post in site.posts %}
+{% for post in paginator.posts %}
+
+{% if post.categories contains "seo01" %}
 
 <div class="post-item">
   <h2>
@@ -18,7 +23,7 @@ layout: null
     {{ post.description }}
   </div>
 
-  {% assign before_svg = post.excerpt | split: '<svg' | first %}
+  {% assign before_svg = post.content | split: '<svg' | first %}
 
   <div class="excerpt spo">
     {{ before_svg }}
@@ -26,9 +31,9 @@ layout: null
 
 </div>
 
+{% endif %}
+
 {% endfor %}
-
-
 
 
 
