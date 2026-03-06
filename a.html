@@ -18,7 +18,7 @@ layout: null
     {{ post.description }}
   </div>
 
-  {% assign before_svg = post.content | split: '<svg' | first %}
+  {% assign before_svg = post.excerpt | split: '<svg' | first %}
 
   <div class="excerpt spo">
     {{ before_svg }}
@@ -27,3 +27,13 @@ layout: null
 </div>
 
 {% endfor %}
+
+
+
+
+
+
+
+
+
+
