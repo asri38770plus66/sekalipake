@@ -1,6 +1,3 @@
----
-layout: null
----
 <!DOCTYPE html>
 <html lang="en" loading="lazy">
 <head loading="lazy">
@@ -200,7 +197,7 @@ layout: null
   </div>
 
   <div class="excerpt spoo">
-{{ post.excerpt | split: '<svg' | first | truncatewords: 200 }}
+{{ post.excerpt | strip_html | truncatewords: 200 }}
 </div>
 
 </div>
